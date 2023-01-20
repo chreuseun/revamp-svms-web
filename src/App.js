@@ -1,12 +1,12 @@
+import { useEffect } from 'react';
+
 import logo from './logo.svg';
 import './App.css';
-import {useEffect} from 'react'
 
 function App() {
-
-useEffect(()=>{
-  console.log('--- REACT')
-},[])
+  useEffect(() => {
+    console.log('--- REACT');
+  }, []);
 
   return (
     <div className="App">
@@ -19,8 +19,7 @@ useEffect(()=>{
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           Learn React
         </a>
       </header>
