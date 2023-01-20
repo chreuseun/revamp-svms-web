@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
   useEffect(() => {
     console.log('--- REACT');
   }, []);
@@ -25,6 +25,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;

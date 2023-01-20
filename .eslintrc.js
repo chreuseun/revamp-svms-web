@@ -10,6 +10,14 @@ module.exports = {
     'eslint:recommended',
     'plugin:prettier/recommended',
   ],
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['.'],
+        extensions: ['.js', '.jsx'],
+      },
+    },
+  },
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
