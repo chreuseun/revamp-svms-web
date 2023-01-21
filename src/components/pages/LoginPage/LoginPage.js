@@ -3,17 +3,21 @@ import { Button, Form, Input } from 'antd';
 
 import { DefaultContainer } from 'src/components/common';
 import { LOGIN_FORM, LOGIN_PAGE_TITLE } from 'src/constants/login';
+import { usePOSTLogin } from 'src/hooks/APIs/login';
 
 const { USERNAME_INPUT, PASSWORD_INPUT, SUBMIT_BUTTON } = LOGIN_FORM;
 
 const LoginPage = () => {
   const [form] = Form.useForm();
+  const { runPOSTLogin } = usePOSTLogin();
 
   const inputtedUsername = Form.useWatch(USERNAME_INPUT.name, form);
   const inputtedPassword = Form.useWatch(PASSWORD_INPUT.name, form);
 
   const onFinish = values => {
     console.log('Success:', values);
+    const { password, username } = values;
+    runPOSTLogin({ password, username });
   };
 
   const onFinishFailed = errorInfo => {
