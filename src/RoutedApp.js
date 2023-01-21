@@ -1,21 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import publicRoutes from 'src/routes/public/publicRouter';
+import appRouter from 'src/routes/app/appRouter';
+
+import { updateAuthorizationReducer } from 'src/redux/reducers/authorizationReducer';
+import { getAuthorizationToken } from 'src/utils/authorization';
+import { AuthorizingLoadingPage } from 'src/components/pages';
 
 const RoutedApp = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { isAuthorizing, isLoggedIn } = useSelector(state => state.authorizationReducer);
 
   useEffect(() => {
-    console.log('--- CHECING AUTORIZATION');
-    setIsLoading(false);
+    const accessToken = getAuthorizationToken();
+
+    if (accessToken) {
+      dispatch(updateAuthorizationReducer({ isAuthorizing: false, isLoggedIn: true }));
+    } else {
+      dispatch(updateAuthorizationReducer({ isAuthorizing: false, isLoggedIn: false }));
+    }
   }, []);
 
-  if (isLoading) {
-    console.log('-- DISPLAY LOADING PROMPT');
+  const showLoginForm = !isLoggedIn && !isAuthorizing;
+  const showApp = isLoggedIn && !isAuthorizing;
+
+  if (showApp) {
+    return <RouterProvider router={appRouter} />;
   }
 
-  return <RouterProvider router={publicRoutes} />;
+  if (showLoginForm) {
+    return <RouterProvider router={publicRoutes} />;
+  }
+
+  return <AuthorizingLoadingPage />;
 };
 
 export default RoutedApp;

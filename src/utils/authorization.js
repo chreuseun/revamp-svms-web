@@ -1,13 +1,15 @@
+import { ACCESS_TOKEN } from 'src/constants/localStorage';
+
 const generateAuthorizationToken = ({ token = null }) => {
   try {
-    if (!token) {
-      throw new Error('invalid value of token');
-    }
-
     return `Bearer ${token}`;
   } catch {
     return '';
   }
 };
 
-export { generateAuthorizationToken };
+const getAuthorizationToken = () => {
+  return localStorage.getItem(ACCESS_TOKEN);
+};
+
+export { generateAuthorizationToken, getAuthorizationToken };
