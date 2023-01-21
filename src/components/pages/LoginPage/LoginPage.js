@@ -16,13 +16,8 @@ const LoginPage = () => {
   const inputtedPassword = Form.useWatch(PASSWORD_INPUT.name, form);
 
   const onFinish = values => {
-    console.log('Success:', values);
     const { password, username } = values;
     runPOSTLogin({ password, username });
-  };
-
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
   };
 
   const isDisabled = !inputtedUsername || !inputtedPassword;
@@ -48,7 +43,6 @@ const LoginPage = () => {
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off">
           <Form.Item
             label={USERNAME_INPUT.label}
