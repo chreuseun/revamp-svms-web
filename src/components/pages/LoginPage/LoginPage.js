@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, Input, Typography } from 'antd';
-import { useSelector } from 'react-redux';
 
 import { DefaultContainer } from 'src/components/common';
 import { LOGIN_FORM, LOGIN_PAGE_TITLE } from 'src/constants/login';
@@ -10,7 +9,6 @@ import './login-page.css';
 const { USERNAME_INPUT, PASSWORD_INPUT, SUBMIT_BUTTON } = LOGIN_FORM;
 
 const LoginPage = () => {
-  const reduxState = useSelector(state => state);
   const [form] = Form.useForm();
   const { runPOSTLogin, isLoginLoading } = usePOSTLogin();
 
@@ -31,7 +29,6 @@ const LoginPage = () => {
 
   return (
     <DefaultContainer isLoading={isLoginLoading}>
-      <pre>{JSON.stringify(reduxState, null, 4)}</pre>
       <Typography.Title>{LOGIN_PAGE_TITLE}</Typography.Title>
       <div className="login-page-form-div">
         <Form
