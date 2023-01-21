@@ -50,19 +50,21 @@ const App = () => {
   const onCollapse = () => {
     setCollapsed(p => !p);
   };
+
+  <Button
+    type="primary"
+    onClick={onCollapse}
+    style={{ width: '100%', marginTop: 8, marginBottom: 8 }}>
+    {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+  </Button>;
+
   return (
     <div style={{ overflowY: 'scroll', height: '100%', marginRight: 4 }}>
-      <Button
-        type="primary"
-        onClick={onCollapse}
-        style={{ width: '100%', marginTop: 8, marginBottom: 8 }}>
-        {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button>
       <Menu
         inlineCollapsed={isCollapsed}
         style={{
-          maxWidth: 300,
-          minWidth: 50,
+          maxWidth: 250,
+          minWidth: 25,
           overflowY: 'scroll',
           borderRadius: 8,
           height: '100%',
@@ -71,7 +73,15 @@ const App = () => {
         defaultOpenKeys={['sub1']}
         mode={'inline'}
         theme={'dark'}
-        items={items}
+        items={[
+          {
+            key: 'collapse',
+            icon: isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />,
+            onClick: onCollapse,
+            label: 'SVMS',
+          },
+          ...items,
+        ]}
       />
     </div>
   );
