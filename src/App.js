@@ -1,30 +1,21 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider } from 'react-router-dom';
+import publicRoutes from 'src/routes/public/publicRouter';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    console.log('--- REACT');
+    console.log('--- CHECING AUTORIZATION');
+    setIsLoading(false);
   }, []);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  if (isLoading) {
+    console.log('-- DISPLAY LOADING PROMPT');
+  }
+
+  return <RouterProvider router={publicRoutes} />;
 };
 
 export default App;
