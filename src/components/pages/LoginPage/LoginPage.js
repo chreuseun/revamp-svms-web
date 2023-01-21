@@ -1,15 +1,16 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Typography } from 'antd';
 
 import { DefaultContainer } from 'src/components/common';
 import { LOGIN_FORM, LOGIN_PAGE_TITLE } from 'src/constants/login';
 import { usePOSTLogin } from 'src/hooks/APIs/login';
+import './login-page.css';
 
 const { USERNAME_INPUT, PASSWORD_INPUT, SUBMIT_BUTTON } = LOGIN_FORM;
 
 const LoginPage = () => {
   const [form] = Form.useForm();
-  const { runPOSTLogin } = usePOSTLogin();
+  const { runPOSTLogin, isLoginLoading } = usePOSTLogin();
 
   const inputtedUsername = Form.useWatch(USERNAME_INPUT.name, form);
   const inputtedPassword = Form.useWatch(PASSWORD_INPUT.name, form);
@@ -27,9 +28,8 @@ const LoginPage = () => {
   const isDisabled = !inputtedUsername || !inputtedPassword;
 
   return (
-    <DefaultContainer>
-      <h1>{LOGIN_PAGE_TITLE}</h1>
-
+    <DefaultContainer isLoading={isLoginLoading}>
+      <Typography.Title>{LOGIN_PAGE_TITLE}</Typography.Title>
       <div className="login-page-form-div">
         <Form
           form={form}
