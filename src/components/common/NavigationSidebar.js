@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import {
   AppstoreOutlined,
   MailOutlined,
@@ -7,7 +7,6 @@ import {
   LinkOutlined,
 } from '@ant-design/icons';
 import { Divider, Menu, Switch } from 'antd';
-import { useState } from 'react';
 
 function getItem(label, key, icon, children) {
   return {
@@ -46,26 +45,34 @@ const items = [
 const App = () => {
   const [mode, setMode] = useState('inline');
   const [theme, setTheme] = useState('light');
+  const [isCollapsed, setCollapsed] = useState(true);
+
   const changeMode = value => {
     setMode(value ? 'vertical' : 'inline');
   };
   const changeTheme = value => {
     setTheme(value ? 'dark' : 'light');
   };
+
+  const onCollapse = () => {
+    setCollapsed(p => !p);
+  };
   return (
     <>
-      <Switch onChange={changeMode} /> Change Mode
+      <Switch onChange={changeMode} /> Change Mode {mode}
       <Divider type="vertical" />
-      <Switch onChange={changeTheme} /> Change Style
+      <Switch onChange={changeTheme} /> Change Style {theme}
+      <Switch onChange={onCollapse} /> Collapse {isCollapsed ? 'Y' : 'N'}
       <br />
       <br />
       <Menu
-        inlineCollapsed={true}
+        inlineCollapsed={isCollapsed}
         style={{
-          width: 256,
-          border: '3px solid red',
+          maxWidth: 300,
+          border: '3px solid #EFEFEF',
           height: '100%',
           overflowY: 'scroll',
+          borderRadius: 8,
         }}
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
