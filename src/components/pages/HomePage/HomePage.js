@@ -1,10 +1,11 @@
 import React from 'react';
+import { DefaultContainer } from 'src/components/common';
 
 const HomePage = () => {
   return (
-    <div>
+    <DefaultContainer>
       <h2>HomePage</h2>
-    </div>
+    </DefaultContainer>
   );
 };
 
