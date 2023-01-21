@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 
 import PropTypes from 'prop-types';
 
-const DefaultContainer = ({ children, customStyles = {}, isLoading = false }) => {
+const DefaultContainer = ({ children, customStyles = {}, isLoading = false } = {}) => {
   return (
     <Spin size="large" spinning={isLoading}>
       <div className="svms-column-container" style={customStyles}>
