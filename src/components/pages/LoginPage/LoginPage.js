@@ -28,8 +28,18 @@ const LoginPage = () => {
   const isDisabled = !inputtedUsername || !inputtedPassword;
 
   return (
-    <DefaultContainer isLoading={isLoginLoading}>
-      <Typography.Title>{LOGIN_PAGE_TITLE}</Typography.Title>
+    <DefaultContainer
+      isLoading={isLoginLoading}
+      customStyles={{
+        justifyContent: 'flex-start',
+        marginTop: 32,
+      }}>
+      <img
+        src="/assets/images/dyci-logo.png"
+        alt="logo"
+        style={{ width: 200, height: 'auto', maxWidth: 200, minWidth: 70 }}
+      />
+      <Typography.Title style={{ margin: 0, padding: 0 }}>{LOGIN_PAGE_TITLE}</Typography.Title>
       <div className="login-page-form-div">
         <Form
           form={form}
