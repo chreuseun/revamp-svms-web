@@ -1,10 +1,10 @@
 import React from 'react';
-import { DefaultContainer } from 'src/components/common';
+import { NavigationSidebar, DefaultContainer } from 'src/components/common';
 
 const HomePage = () => {
   return (
-    <DefaultContainer>
-      <h2>HomePage</h2>
+    <DefaultContainer customStyles={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+      <NavigationSidebar />
     </DefaultContainer>
   );
 };
