@@ -5,8 +5,10 @@ import {
   CalendarOutlined,
   SettingOutlined,
   LinkOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
 } from '@ant-design/icons';
-import { Divider, Menu, Switch } from 'antd';
+import { Menu, Button } from 'antd';
 
 function getItem(label, key, icon, children) {
   return {
@@ -43,44 +45,35 @@ const items = [
   getItem('Navigation Two_11', '222', <CalendarOutlined />),
 ];
 const App = () => {
-  const [mode, setMode] = useState('inline');
-  const [theme, setTheme] = useState('light');
   const [isCollapsed, setCollapsed] = useState(true);
-
-  const changeMode = value => {
-    setMode(value ? 'vertical' : 'inline');
-  };
-  const changeTheme = value => {
-    setTheme(value ? 'dark' : 'light');
-  };
 
   const onCollapse = () => {
     setCollapsed(p => !p);
   };
   return (
-    <>
-      <Switch onChange={changeMode} /> Change Mode {mode}
-      <Divider type="vertical" />
-      <Switch onChange={changeTheme} /> Change Style {theme}
-      <Switch onChange={onCollapse} /> Collapse {isCollapsed ? 'Y' : 'N'}
-      <br />
-      <br />
+    <div style={{ overflowY: 'scroll', height: '100%', marginRight: 4 }}>
+      <Button
+        type="primary"
+        onClick={onCollapse}
+        style={{ width: '100%', marginTop: 8, marginBottom: 8 }}>
+        {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </Button>
       <Menu
         inlineCollapsed={isCollapsed}
         style={{
           maxWidth: 300,
-          border: '3px solid #EFEFEF',
-          height: '100%',
+          minWidth: 50,
           overflowY: 'scroll',
           borderRadius: 8,
+          height: '100%',
         }}
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
-        mode={mode}
-        theme={theme}
+        mode={'inline'}
+        theme={'dark'}
         items={items}
       />
-    </>
+    </div>
   );
 };
 export default App;

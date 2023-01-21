@@ -7,7 +7,10 @@ const ENDPOINTS = {
     API_LOGIN: '/api/login',
   },
   ACADEMIC_YEAR: {
-    API_ACADYEAR_GET: `/api/acad_year/get`,
+    API_ACADYEAR_GET: '/api/acad_year/get',
+  },
+  AUTH: {
+    API_AUTH: '/api/auth',
   },
 };
 

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { axiosGETRequest } from 'src/utils/axios';
+import { getAuthorizationToken } from 'src/utils/authorization';
 
-const useHTTPGet = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
+const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {}) => {
   const [isGETRequestLoading, setIsGetRequestLoading] = useState(false);
 
-  const runHTTPGetRequest = async ({ config, headers = {}, url = '' } = {}) => {
+  const runHTTPGetRequest = async ({ config, headers = {} } = {}) => {
     setIsGetRequestLoading(true);
 
     try {
