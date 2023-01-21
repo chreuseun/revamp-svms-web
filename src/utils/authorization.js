@@ -12,4 +12,9 @@ const getAuthorizationToken = () => {
   return localStorage.getItem(ACCESS_TOKEN);
 };
 
-export { generateAuthorizationToken, getAuthorizationToken };
+const initiateLogout = () => {
+  localStorage.clear();
+  window.location.reload(true);
+};
+
+export { generateAuthorizationToken, getAuthorizationToken, initiateLogout };

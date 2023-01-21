@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { axiosPOSTRequest } from 'src/utils/axios';
 
-const useHTTPost = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
+const useHTTPost = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {}) => {
   const [isPOSTRequestLoading, setIsPOSTRequestLoading] = useState(false);
 
-  const runHTTPPostRequest = async ({ data = {}, headers = {}, url = '' } = {}) => {
+  const runHTTPPostRequest = async ({ data = {}, headers = {} } = {}) => {
     setIsPOSTRequestLoading(true);
 
     try {

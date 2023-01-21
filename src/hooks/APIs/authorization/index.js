@@ -1,3 +1,4 @@
 import useGETAuth from './useGETAuth';
+import usePOSTLogout from './usePOSTLogout';
 
-export { useGETAuth };
+export { useGETAuth, usePOSTLogout };

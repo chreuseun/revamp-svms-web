@@ -7,8 +7,10 @@ import {
   LinkOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
-import { Menu, Button } from 'antd';
+import { Menu, Modal } from 'antd';
+import { initiateLogout } from 'src/utils/authorization';
 
 function getItem(label, key, icon, children) {
   return {
@@ -51,15 +53,24 @@ const App = () => {
     setCollapsed(p => !p);
   };
 
-  <Button
-    type="primary"
-    onClick={onCollapse}
-    style={{ width: '100%', marginTop: 8, marginBottom: 8 }}>
-    {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-  </Button>;
+  const showLogoutPrompt = () => {
+    Modal.warning({
+      title: 'Do you want to logout?',
+      okCancel: true,
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: initiateLogout,
+    });
+  };
 
   return (
-    <div style={{ overflowY: 'scroll', height: '100%', marginRight: 4 }}>
+    <div
+      style={{
+        overflowY: 'scroll',
+        height: '100%',
+        marginRight: 4,
+        paddingRight: 16,
+      }}>
       <Menu
         inlineCollapsed={isCollapsed}
         style={{
@@ -81,6 +92,12 @@ const App = () => {
             label: 'SVMS',
           },
           ...items,
+          {
+            key: 'logout',
+            icon: <LogoutOutlined />,
+            onClick: showLogoutPrompt,
+            label: 'Logout ',
+          },
         ]}
       />
     </div>

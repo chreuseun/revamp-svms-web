@@ -12,6 +12,8 @@ import { updateAuthorizationReducer } from 'src/redux/reducers/authorizationRedu
 const usePOSTLogin = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
   const dispatch = useDispatch();
   const { isPOSTRequestLoading: isLoginLoading, runHTTPPostRequest } = useHTTPost({
+    url: ENDPOINTS.LOGIN.API_LOGIN,
+
     onCompleted: response => {
       const { data: responseData = {} } = response || {};
       const { error = null, msg = null } = responseData || {};

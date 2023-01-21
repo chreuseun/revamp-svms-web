@@ -11,6 +11,7 @@ const ENDPOINTS = {
   },
   AUTH: {
     API_AUTH: '/api/auth',
+    API_LOGOUT: '/api/logout',
   },
 };
 
