@@ -4,7 +4,7 @@ const generateAuthorizationToken = ({ token = null }) => {
       throw new Error('invalid value of token');
     }
 
-    return `Beare ${token}`;
+    return `Bearer ${token}`;
   } catch {
     return '';
   }
