@@ -6,6 +6,9 @@ const ENDPOINTS = {
   LOGIN: {
     API_LOGIN: '/api/login',
   },
+  ACADEMIC_YEAR: {
+    API_ACADYEAR_GET: `/api/acad_year/get`,
+  },
 };
 
 export { DEFAULT_BASE_URL, ENDPOINTS };
