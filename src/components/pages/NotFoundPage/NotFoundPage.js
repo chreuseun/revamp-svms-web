@@ -1,24 +1,28 @@
 import React from 'react';
-import { Empty } from 'antd';
+import { Empty, Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { DefaultContainer } from 'src/components/common';
+import { navigateToRoute } from 'src/utils/reactRouterDom';
 
 const NotFoundPage = () => {
+  const navigate = useNavigate();
+
+  const toHomePage = () => {
+    navigateToRoute({ navigate, routeName: '/' });
+  };
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      }}>
+    <DefaultContainer>
       <Empty
         description={
-          <span>
-            Customize <a href="/">Page Not Found</a>
-          </span>
+          <div>
+            <h2>Page Not Found</h2>
+            <Button onClick={toHomePage}>Go to Homepage</Button>
+          </div>
         }
       />
-    </div>
+    </DefaultContainer>
   );
 };
 

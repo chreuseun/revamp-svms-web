@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { DefaultContainer } from 'src/components/common';
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return <DefaultContainer>LoginPage</DefaultContainer>;
 };
 
 export default LoginPage;
