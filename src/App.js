@@ -1,12 +1,13 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
-import ReduxProvider from 'src/redux/ReduxProvider';
+import store from 'src/redux/store';
 import RoutedApp from 'src/RoutedApp';
 
 const App = () => (
-  <ReduxProvider>
+  <Provider store={store}>
     <RoutedApp />
-  </ReduxProvider>
+  </Provider>
 );
 
 export default App;
