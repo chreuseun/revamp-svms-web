@@ -1,52 +1,10 @@
 import { useState } from 'react';
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  CalendarOutlined,
-  SettingOutlined,
-  LinkOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
+import { MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Menu, Modal } from 'antd';
 import { initiateLogout } from 'src/utils/authorization';
+import { ADMIN_NAVIGATION_BAR_DATA } from 'src/constants/navigationBar';
 
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-const items = [
-  getItem('Navigation One', '1', <MailOutlined />),
-  getItem('Navigation Two', '2', <CalendarOutlined />),
-  getItem('Navigation Two', 'sub1', <AppstoreOutlined />, [
-    getItem('Option 3', '3'),
-    getItem('Option 4', '4'),
-    getItem('Submenu', 'sub1-2', null, [getItem('Option 5', '5'), getItem('Option 6', '6')]),
-  ]),
-  getItem('Navigation Three', 'sub2', <SettingOutlined />, [
-    getItem('Option 7', '7'),
-    getItem('Option 8', '8'),
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-  ]),
-  getItem(
-    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-      Ant Design
-    </a>,
-    'link',
-    <LinkOutlined />,
-  ),
-  getItem('Navigation One_1', '11', <MailOutlined />),
-  getItem('Navigation Two_1', '22', <CalendarOutlined />),
-  getItem('Navigation One_11', '111', <MailOutlined />),
-  getItem('Navigation Two_11', '222', <CalendarOutlined />),
-];
-const App = () => {
+const NavigationSidebar = () => {
   const [isCollapsed, setCollapsed] = useState(true);
 
   const onCollapse = () => {
@@ -63,6 +21,12 @@ const App = () => {
     });
   };
 
+  const RenderCollapseIcon = () => (isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />);
+
+  const onClickMenu = e => {
+    console.log('click ', e?.key);
+  };
+
   return (
     <div
       style={{
@@ -72,6 +36,7 @@ const App = () => {
         paddingRight: 16,
       }}>
       <Menu
+        onClick={onClickMenu}
         inlineCollapsed={isCollapsed}
         style={{
           maxWidth: 250,
@@ -87,11 +52,11 @@ const App = () => {
         items={[
           {
             key: 'collapse',
-            icon: isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />,
+            icon: <RenderCollapseIcon />,
             onClick: onCollapse,
             label: 'SVMS',
           },
-          ...items,
+          ...ADMIN_NAVIGATION_BAR_DATA,
           {
             key: 'logout',
             icon: <LogoutOutlined />,
@@ -103,4 +68,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
+export default NavigationSidebar;
