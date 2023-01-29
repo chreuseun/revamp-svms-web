@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import PageHeader from './PageHeader';
 
-const PageContentContainer = ({ title = null, children = null }) => {
+const PageContentContainer = ({ title = null, children = null, containerStyles = {} }) => {
   return (
     <div
       style={{
@@ -22,6 +22,7 @@ const PageContentContainer = ({ title = null, children = null }) => {
           marginRight: 5,
           borderRadius: 8,
           marginBottom: 5,
+          ...containerStyles,
         }}>
         {children}
       </div>
@@ -32,6 +33,7 @@ const PageContentContainer = ({ title = null, children = null }) => {
 PageContentContainer.propTypes = {
   title: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.element, PropTypes.node]),
+  containerStyles: PropTypes.object,
 };
 
 export default PageContentContainer;
