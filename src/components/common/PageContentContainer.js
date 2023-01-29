@@ -22,7 +22,9 @@ const PageContentContainer = ({ title = null, children = null }) => {
           marginRight: 5,
           borderRadius: 8,
           marginBottom: 5,
-        }}></div>
+        }}>
+        {children}
+      </div>
     </div>
   );
 };
