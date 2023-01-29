@@ -7,6 +7,7 @@ const HomePage = () => {
   useEffect(() => {
     runGETAuth();
   }, []);
+
   return (
     <DefaultContainer
       customStyles={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}

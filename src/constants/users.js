@@ -1,0 +1,7 @@
+const ACCOUNT_TYPES = {
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+  SUBJECT: 'SUBJECT',
+};
+
+export { ACCOUNT_TYPES };

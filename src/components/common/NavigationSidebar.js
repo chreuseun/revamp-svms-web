@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Menu, Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import { initiateLogout } from 'src/utils/authorization';
 import { ADMIN_NAVIGATION_BAR_DATA } from 'src/constants/navigationBar';
+import { navigateToRoute } from 'src/utils/reactRouterDom';
 
 const NavigationSidebar = () => {
+  const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(true);
 
   const onCollapse = () => {
@@ -24,7 +28,13 @@ const NavigationSidebar = () => {
   const RenderCollapseIcon = () => (isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />);
 
   const onClickMenu = e => {
-    console.log('click ', e?.key);
+    console.log('---- MENU CLICKED: ', e);
+
+    if (e?.key === 'collapse') {
+      return;
+    }
+
+    navigateToRoute({ navigate, routeName: e?.key });
   };
 
   return (
@@ -32,8 +42,6 @@ const NavigationSidebar = () => {
       style={{
         overflowY: 'scroll',
         height: '100%',
-        marginRight: 4,
-        paddingRight: 16,
       }}>
       <Menu
         onClick={onClickMenu}
@@ -42,7 +50,6 @@ const NavigationSidebar = () => {
           maxWidth: 250,
           minWidth: 25,
           overflowY: 'scroll',
-          borderRadius: 8,
           height: '100%',
         }}
         defaultSelectedKeys={['1']}
