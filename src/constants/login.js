@@ -16,7 +16,7 @@ const LOGIN_FORM = {
   },
 };
 
-const LOGIN_PAGE_TITLE = 'SVMS';
+const LOGIN_PAGE_TITLE = `iCLEAR with SDRM`;
 
 const LOGIN_API_MESSAGE = {
   SUCCESS: {
