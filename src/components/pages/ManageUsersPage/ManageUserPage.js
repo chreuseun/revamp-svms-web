@@ -1,7 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Input, Select, Typography, DatePicker } from 'antd';
+
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
+import { MANAGE_USER_INPUT_LABELS, SEARCH_USERS_OPTIONS } from 'src/constants/users';
+
+const { Text } = Typography;
+const { RangePicker } = DatePicker;
+
+const { byLockedOptions, byStateOptions, byUserTypeOptions } = SEARCH_USERS_OPTIONS;
 
 const ManageUsers = () => {
+  const [byUserTypeId, setByUserTypeId] = useState(null);
+  const [byLocked, setByLocked] = useState(null);
+  const [byState, setByState] = useState(null);
+  const [byDateStart, setByDateStart] = useState(null);
+  const [byDateEnd, setByDateEnd] = useState(null);
+
+  const onChangeUserTypeId = val => {
+    setByUserTypeId(val);
+  };
+
+  const onChangeLocked = val => {
+    setByLocked(val);
+  };
+
+  const onChangeByState = val => {
+    setByState(val);
+  };
+
+  const onChangeRangePicker = (_, stringDate) => {
+    const [dateStart, dateEnd] = stringDate;
+    setByDateStart(dateStart || null);
+    setByDateEnd(dateEnd || null);
+  };
+
+  const onPressSearch = value => {
+    console.log({
+      byFullname: value,
+      byUserTypeId,
+      byLocked,
+      byState,
+      byDateStart,
+      byDateEnd,
+    });
+  };
+
   return (
     <DefaultContainer
       customStyles={{
@@ -10,7 +53,54 @@ const ManageUsers = () => {
         flexDirection: 'row',
       }}>
       <NavigationSidebar />
-      <PageContentContainer title="Manage Users" />
+      <PageContentContainer title="Manage Users">
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '2em',
+          }}>
+          <div style={{ flexGrow: 1, marginRight: 8 }}>
+            <Text type="secondary">{MANAGE_USER_INPUT_LABELS.BY_FULLNAME}</Text>
+            <Input.Search enterButton="Search" size="large" onSearch={onPressSearch} allowClear />
+          </div>
+          <div style={{ flexGrow: 1, marginRight: 8, display: 'flex', flexDirection: 'column' }}>
+            <Text type="secondary">{MANAGE_USER_INPUT_LABELS.BY_DATERANGE}</Text>
+            <RangePicker format="YYYY-MM-DD" size="large" onChange={onChangeRangePicker} />
+          </div>
+          <div style={{ flexGrow: 1, marginRight: 8 }}>
+            <Text type="secondary">{MANAGE_USER_INPUT_LABELS.BY_USER_TYPE}</Text>
+            <Select
+              size="large"
+              style={{ width: '100%' }}
+              onChange={onChangeUserTypeId}
+              options={byUserTypeOptions}
+            />
+          </div>
+          <div style={{ flexGrow: 1, marginRight: 8 }}>
+            <Text type="secondary">{MANAGE_USER_INPUT_LABELS.BY_LOCKED}</Text>
+            <Select
+              size="large"
+              style={{ width: '100%' }}
+              showSearch
+              onChange={onChangeLocked}
+              options={byLockedOptions}
+            />
+          </div>
+          <div style={{ flexGrow: 1, marginRight: 8 }}>
+            <Text type="secondary">{MANAGE_USER_INPUT_LABELS.BY_STATUS}</Text>
+            <Select
+              size="large"
+              style={{ width: '100%' }}
+              showSearch
+              onChange={onChangeByState}
+              options={byStateOptions}
+            />
+          </div>
+        </div>
+      </PageContentContainer>
     </DefaultContainer>
   );
 };

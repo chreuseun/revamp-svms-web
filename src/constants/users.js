@@ -4,6 +4,21 @@ const ACCOUNT_TYPES = {
   SUBJECT: 'SUBJECT',
 };
 
+const USER_TYPES_OPTIONS = [
+  {
+    value: ACCOUNT_TYPES.ADMIN,
+    label: 'Admin',
+  },
+  {
+    value: ACCOUNT_TYPES.USER,
+    label: 'User',
+  },
+  {
+    value: ACCOUNT_TYPES.SUBJECT,
+    label: 'Subject',
+  },
+];
+
 const ADD_USER_FORM_INPUTS = {
   LASTNAME: {
     label: 'Lastname',
@@ -24,20 +39,7 @@ const ADD_USER_FORM_INPUTS = {
     name: 'user_type',
     placeholder: 'Select a type',
     rules: [{ required: true, message: 'User type is required' }],
-    selectOptions: [
-      {
-        value: ACCOUNT_TYPES.ADMIN,
-        label: 'Admin',
-      },
-      {
-        value: ACCOUNT_TYPES.USER,
-        label: 'User',
-      },
-      {
-        value: ACCOUNT_TYPES.SUBJECT,
-        label: 'Subject',
-      },
-    ],
+    selectOptions: USER_TYPES_OPTIONS,
   },
   CONTACT_NO: {
     label: 'Contact Number',
@@ -74,4 +76,57 @@ const ADD_USER = {
   SUCCESS_ADD_MESSAGE: 'Account Created Successfully',
 };
 
-export { ACCOUNT_TYPES, ADD_USER_FORM_INPUTS, ADD_USER };
+const MANAGE_USER_INPUT_LABELS = {
+  BY_USER_TYPE: 'Search By User Type',
+  BY_LOCKED: 'Search By Locked',
+  BY_STATUS: 'Search By Status',
+  BY_FULLNAME: 'Search by fullname',
+  BY_DATERANGE: 'Search by Date Range',
+};
+
+const SEARCH_USERS_OPTIONS = {
+  byUserTypeOptions: [
+    {
+      value: 'ALL',
+      label: 'All',
+    },
+    ...USER_TYPES_OPTIONS,
+  ],
+  byLockedOptions: [
+    {
+      value: 'ALL',
+      label: 'All',
+    },
+    {
+      value: 1,
+      label: 'Yes',
+    },
+    {
+      value: 0,
+      label: 'No',
+    },
+  ],
+  byStateOptions: [
+    {
+      value: 'ALL',
+      label: 'All',
+    },
+    {
+      value: 1,
+      label: 'Active',
+    },
+    {
+      value: 0,
+      label: 'Inactive',
+    },
+  ],
+};
+
+export {
+  ACCOUNT_TYPES,
+  ADD_USER_FORM_INPUTS,
+  ADD_USER,
+  USER_TYPES_OPTIONS,
+  SEARCH_USERS_OPTIONS,
+  MANAGE_USER_INPUT_LABELS,
+};
