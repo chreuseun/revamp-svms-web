@@ -16,6 +16,7 @@ const ENDPOINTS = {
   },
   ACCOUNT: {
     ADD: `/v2/account/add`,
+    GET_ACCOUNTS: `/v2/account/accounts`,
   },
 };
 

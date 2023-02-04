@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Input, Select, Typography, DatePicker } from 'antd';
+import { Input, Select, Typography, DatePicker, notification } from 'antd';
 
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
 import { MANAGE_USER_INPUT_LABELS, SEARCH_USERS_OPTIONS } from 'src/constants/users';
+import { useGETAccountsByFilters } from 'src/hooks/APIs/account';
 
 const { Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -15,6 +16,19 @@ const ManageUsers = () => {
   const [byState, setByState] = useState(null);
   const [byDateStart, setByDateStart] = useState(null);
   const [byDateEnd, setByDateEnd] = useState(null);
+  const [accountsList, setAccountsList] = useState([]);
+
+  const { isGETAccountsByFiltersLoading, runGETAccountsByFilters } = useGETAccountsByFilters({
+    onCompleted: response => {
+      const { data } = response;
+      setAccountsList(data?.data?.results || []);
+    },
+    onError: err => {
+      notification.error({
+        message: err,
+      });
+    },
+  });
 
   const onChangeUserTypeId = val => {
     setByUserTypeId(val);
@@ -35,13 +49,15 @@ const ManageUsers = () => {
   };
 
   const onPressSearch = value => {
-    console.log({
-      byFullname: value,
-      byUserTypeId,
-      byLocked,
-      byState,
-      byDateStart,
-      byDateEnd,
+    runGETAccountsByFilters({
+      params: {
+        date_start: byDateStart,
+        date_end: byDateEnd,
+        text: value,
+        type: byUserTypeId,
+        locked: byLocked,
+        state: byState,
+      },
     });
   };
 
@@ -51,9 +67,16 @@ const ManageUsers = () => {
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         flexDirection: 'row',
-      }}>
+      }}
+      isLoading={isGETAccountsByFiltersLoading}>
       <NavigationSidebar />
-      <PageContentContainer title="Manage Users">
+      <PageContentContainer
+        title="Manage Users"
+        containerStyles={{
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}>
         <div
           style={{
             display: 'flex',
@@ -99,6 +122,14 @@ const ManageUsers = () => {
               options={byStateOptions}
             />
           </div>
+        </div>
+        <div
+          style={{
+            flexGrow: 1,
+            padding: 16,
+            overflow: 'scroll',
+          }}>
+          <pre style={{ backgroundColor: '#DFDFDF' }}>{JSON.stringify(accountsList, null, 4)}</pre>
         </div>
       </PageContentContainer>
     </DefaultContainer>
