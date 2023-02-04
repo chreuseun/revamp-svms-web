@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { RouterProvider } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import publicRoutes from 'src/routes/public/publicRouter';
-import appRouter from 'src/routes/app/appRouter';
+import { AppRouterProvider, PublicRouterProvider } from 'src/routes/routerProviders';
 
 import { updateAuthorizationReducer } from 'src/redux/reducers/authorizationReducer';
 import { getAuthorizationToken } from 'src/utils/authorization';
@@ -27,11 +25,11 @@ const RoutedApp = () => {
   const showApp = isLoggedIn && !isAuthorizing;
 
   if (showApp) {
-    return <RouterProvider router={appRouter} />;
+    return <AppRouterProvider />;
   }
 
   if (showLoginForm) {
-    return <RouterProvider router={publicRoutes} />;
+    return <PublicRouterProvider />;
   }
 
   return <AuthorizingLoadingPage />;
