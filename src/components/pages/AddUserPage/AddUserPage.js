@@ -3,6 +3,7 @@ import { Form, Input, Select, Button, Typography } from 'antd';
 
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
 import { ADD_USER_FORM_INPUTS } from 'src/constants/users';
+import { useGetAppStore } from 'src/hooks/redux';
 
 const { Option } = Select;
 
@@ -10,6 +11,7 @@ const { useWatch } = Form;
 
 const AddUserPage = () => {
   const [addUserForm] = Form.useForm();
+  const { isInitialLoading } = useGetAppStore();
 
   const firstname = useWatch(ADD_USER_FORM_INPUTS.FIRSTNAME.name, addUserForm);
   const lastname = useWatch(ADD_USER_FORM_INPUTS.LASTNAME.name, addUserForm);
@@ -30,7 +32,7 @@ const AddUserPage = () => {
   };
 
   return (
-    <DefaultContainer customStyles={styles.container}>
+    <DefaultContainer isLoading={isInitialLoading} customStyles={styles.container}>
       <NavigationSidebar />
       <PageContentContainer
         containerStyles={{
