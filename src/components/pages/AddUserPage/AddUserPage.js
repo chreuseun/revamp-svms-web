@@ -1,9 +1,11 @@
 import React from 'react';
-import { Form, Input, Select, Button, Typography } from 'antd';
+import { Form, Input, Select, Button, Typography, notification, Modal } from 'antd';
 
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
-import { ADD_USER_FORM_INPUTS } from 'src/constants/users';
+import { ADD_USER_FORM_INPUTS, ADD_USER } from 'src/constants/users';
 import { useGetAppStore } from 'src/hooks/redux';
+import { usePOSTAddAccount } from 'src/hooks/APIs/account';
+import { reloadWindow } from 'src/utils/app';
 
 const { Option } = Select;
 
@@ -13,26 +15,63 @@ const AddUserPage = () => {
   const [addUserForm] = Form.useForm();
   const { isInitialLoading } = useGetAppStore();
 
-  const firstname = useWatch(ADD_USER_FORM_INPUTS.FIRSTNAME.name, addUserForm);
-  const lastname = useWatch(ADD_USER_FORM_INPUTS.LASTNAME.name, addUserForm);
-  const middlename = useWatch(ADD_USER_FORM_INPUTS.MIDDLENAME.name, addUserForm);
-  const usertype = useWatch(ADD_USER_FORM_INPUTS.USER_TYPE.name, addUserForm);
-  const username = useWatch(ADD_USER_FORM_INPUTS.USERNAME.name, addUserForm);
-  const contactNo = useWatch(ADD_USER_FORM_INPUTS.CONTACT_NO.name, addUserForm);
+  const { isPOSTAddAccountLoading, runPOSTAddAccount } = usePOSTAddAccount({
+    onCompleted: response => {
+      const { data } = response;
+      const { success, error_message: errMsg = '' } = data || {};
+
+      if (success) {
+        Modal.success({
+          title: ADD_USER.SUCCESS_ADD_MESSAGE,
+          onOk: () => {
+            reloadWindow();
+          },
+        });
+      } else {
+        notification.error({
+          message: errMsg,
+        });
+      }
+    },
+    onError: error => {
+      notification.error({
+        message: error,
+      });
+    },
+  });
+
   const password = useWatch(ADD_USER_FORM_INPUTS.PASSWORD.name, addUserForm);
   const repeatPassword = useWatch(ADD_USER_FORM_INPUTS.REPEAT_PASSWORD.name, addUserForm);
   const isRepeatPasswordMatched = !(password === repeatPassword);
 
-  const onChangeUserType = userTypeValue => {
-    console.log('--- USER_TYPE_VALUE: ', userTypeValue);
-  };
-
   const onSubmitForm = values => {
-    console.log('--- VALUES: ', values);
+    const {
+      user_type: userTypeId,
+      username,
+      password = '',
+      lastname,
+      firstname,
+      middlename,
+      contact_number: contactNo,
+    } = values;
+
+    const addAccountParams = {
+      user_type_id: userTypeId,
+      username,
+      password,
+      lastname,
+      firstname,
+      middlename,
+      contact_number: contactNo,
+    };
+
+    runPOSTAddAccount({ data: addAccountParams });
   };
 
   return (
-    <DefaultContainer isLoading={isInitialLoading} customStyles={styles.container}>
+    <DefaultContainer
+      isLoading={isInitialLoading || isPOSTAddAccountLoading}
+      customStyles={styles.container}>
       <NavigationSidebar />
       <PageContentContainer
         containerStyles={{
@@ -59,9 +98,7 @@ const AddUserPage = () => {
             <Input />
           </Form.Item>
           <Form.Item {...ADD_USER_FORM_INPUTS.USER_TYPE}>
-            <Select
-              placeholder={ADD_USER_FORM_INPUTS.USER_TYPE.placeholder}
-              onChange={onChangeUserType}>
+            <Select placeholder={ADD_USER_FORM_INPUTS.USER_TYPE.placeholder}>
               {ADD_USER_FORM_INPUTS.USER_TYPE.selectOptions.map(({ value, label }) => (
                 <Option key={value} value={value}>
                   {label}

@@ -70,4 +70,8 @@ const ADD_USER_FORM_INPUTS = {
   },
 };
 
-export { ACCOUNT_TYPES, ADD_USER_FORM_INPUTS };
+const ADD_USER = {
+  SUCCESS_ADD_MESSAGE: 'Account Created Successfully',
+};
+
+export { ACCOUNT_TYPES, ADD_USER_FORM_INPUTS, ADD_USER };
