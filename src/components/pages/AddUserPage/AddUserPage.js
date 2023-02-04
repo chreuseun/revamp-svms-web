@@ -19,13 +19,15 @@ const AddUserPage = () => {
   const contactNo = useWatch(ADD_USER_FORM_INPUTS.CONTACT_NO.name, addUserForm);
   const password = useWatch(ADD_USER_FORM_INPUTS.PASSWORD.name, addUserForm);
   const repeatPassword = useWatch(ADD_USER_FORM_INPUTS.REPEAT_PASSWORD.name, addUserForm);
-  const isRepeatPasswordMatched = !!password && password === repeatPassword;
+  const isRepeatPasswordMatched = !(password === repeatPassword);
 
   const onChangeUserType = userTypeValue => {
     console.log('--- USER_TYPE_VALUE: ', userTypeValue);
   };
 
-  const onSubmitForm = values => {};
+  const onSubmitForm = values => {
+    console.log('--- VALUES: ', values);
+  };
 
   return (
     <DefaultContainer customStyles={styles.container}>
@@ -77,7 +79,7 @@ const AddUserPage = () => {
           <Form.Item
             {...ADD_USER_FORM_INPUTS.REPEAT_PASSWORD}
             extra={
-              !isRepeatPasswordMatched && (
+              isRepeatPasswordMatched && (
                 <Typography.Text type="danger">{'Password do not match'}</Typography.Text>
               )
             }>
@@ -85,7 +87,7 @@ const AddUserPage = () => {
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8 }}>
             <Button
-              disabled={!isRepeatPasswordMatched}
+              disabled={isRepeatPasswordMatched}
               type="primary"
               style={{ width: 200, marginTop: 16 }}
               htmlType={'submit'}>
