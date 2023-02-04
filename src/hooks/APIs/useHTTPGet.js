@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { axiosGETRequest } from 'src/utils/axios';
-import { getAuthorizationToken } from 'src/utils/authorization';
 
 const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {}) => {
   const [isGETRequestLoading, setIsGetRequestLoading] = useState(false);
