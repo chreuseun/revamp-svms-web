@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { axiosGETRequest } from 'src/utils/axios';
+import { Modal } from 'antd';
+import { initiateLogout } from 'src/utils/authorization';
 
 const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {}) => {
   const [isGETRequestLoading, setIsGetRequestLoading] = useState(false);
@@ -20,6 +22,13 @@ const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {
     } catch (getRequestError) {
       if (onError) {
         onError(getRequestError);
+      }
+
+      if (getRequestError?.response?.status === 401) {
+        Modal.warning({
+          title: 'Session expired',
+          onOk: initiateLogout,
+        });
       }
     }
 
