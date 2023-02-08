@@ -20,6 +20,11 @@ const appRouter = createBrowserRouter([
     caseSensitive: true,
   },
   {
+    path: NAVIGATION_BAR_IDS.ADMIN.ADMIN_ADD_DEPARTMENT,
+    element: <ManageUsersPage />,
+    caseSensitive: true,
+  },
+  {
     path: '*',
     element: <NotFoundPage />,
     caseSensitive: true,
