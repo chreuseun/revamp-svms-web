@@ -1,6 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { HomePage, NotFoundPage, AddUserPage, ManageUsersPage } from 'src/components/pages';
+import {
+  HomePage,
+  NotFoundPage,
+  AddUserPage,
+  ManageUsersPage,
+  AddDepartmentPage,
+} from 'src/components/pages';
 import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
 
 const appRouter = createBrowserRouter([
@@ -21,7 +27,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: NAVIGATION_BAR_IDS.ADMIN.ADMIN_ADD_DEPARTMENT,
-    element: <ManageUsersPage />,
+    element: <AddDepartmentPage />,
     caseSensitive: true,
   },
   {
