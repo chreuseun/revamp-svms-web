@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Form, Input, Select, Button } from 'antd';
 
-import { ADD_DEPARTMENTS_FORM_INPUTS } from 'src/constants/departments';
+import { ADD_DEPARTMENTS_FORM_INPUTS, TRADITIONAL_DEPT_DB_ID } from 'src/constants/departments';
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
 import { useGETDepartmentTypes } from 'src/hooks/APIs/departments';
 import {
@@ -15,9 +15,10 @@ const { useWatch } = Form;
 const AddDepartmentPage = () => {
   const [addDeptForm] = Form.useForm();
   const selectedDepartmentType = useWatch(ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TYPES.name, addDeptForm);
-  const { runGETDepartmentTypes, isGETDepartmentTypesLoading } = useGETDepartmentTypes();
-  const { runGETEducationLevels } = useGETEducationLevels();
-  const { runGETEducationLevelsWithCoursesAndYearlevels } =
+  const { runGETDepartmentTypes, isGETDepartmentTypesLoading, departmentTypes } =
+    useGETDepartmentTypes();
+  const { runGETEducationLevels, educationalLevels } = useGETEducationLevels();
+  const { runGETEducationLevelsWithCoursesAndYearlevels, courses, yearlevels } =
     useGETEducationLevelsWithCoursesAndYearlevels();
 
   useEffect(() => {
@@ -26,8 +27,7 @@ const AddDepartmentPage = () => {
     runGETEducationLevelsWithCoursesAndYearlevels();
   }, []);
 
-  const showTraditionalDeptTypesSelect =
-    ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES.displayWhen.includes(selectedDepartmentType);
+  const showTraditionalDeptTypesSelect = selectedDepartmentType === TRADITIONAL_DEPT_DB_ID;
 
   const onSubmitForm = values => {
     console.log('--- ADD DEPT SUBMIT FORM: ', values);
@@ -49,7 +49,7 @@ const AddDepartmentPage = () => {
           </Form.Item>
           <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TYPES}>
             <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TYPES.placeholder}>
-              {ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TYPES.selectOptions.map(({ value, label }) => (
+              {departmentTypes.map(({ value, label }) => (
                 <Option key={value} value={value}>
                   {label}
                 </Option>
@@ -71,7 +71,7 @@ const AddDepartmentPage = () => {
           )}
           <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.ACADEMIC_LEVEL}>
             <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.ACADEMIC_LEVEL.placeholder}>
-              {ADD_DEPARTMENTS_FORM_INPUTS.ACADEMIC_LEVEL.selectOptions.map(({ value, label }) => (
+              {educationalLevels.map(({ value, label }) => (
                 <Option key={value} value={value}>
                   {label}
                 </Option>
@@ -91,7 +91,7 @@ const AddDepartmentPage = () => {
           </Form.Item>
           <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.COURSE}>
             <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.COURSE.placeholder}>
-              {ADD_DEPARTMENTS_FORM_INPUTS.COURSE.selectOptions.map(({ value, label }) => (
+              {courses.map(({ value, label }) => (
                 <Option key={value} value={value}>
                   {label}
                 </Option>
@@ -100,7 +100,7 @@ const AddDepartmentPage = () => {
           </Form.Item>
           <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.YEARLEVEL}>
             <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.YEARLEVEL.placeholder}>
-              {ADD_DEPARTMENTS_FORM_INPUTS.YEARLEVEL.selectOptions.map(({ value, label }) => (
+              {yearlevels.map(({ value, label }) => (
                 <Option key={value} value={value}>
                   {label}
                 </Option>

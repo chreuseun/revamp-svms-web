@@ -1,5 +1,7 @@
 import { ACADEMIC_LEVELS } from './academicLevels';
 
+const TRADITIONAL_DEPT_DB_ID = 2;
+
 const DEPARTMENTS_TYPES = {
   traditional: {
     value: 'traditional',
@@ -106,4 +108,9 @@ const ADD_DEPARTMENTS_FORM_INPUTS = {
   },
 };
 
-export { DEPARTMENTS_TYPES, ADD_DEPARTMENTS_FORM_INPUTS, DEPARTMENTS_TYPES_OPTIONS };
+export {
+  DEPARTMENTS_TYPES,
+  ADD_DEPARTMENTS_FORM_INPUTS,
+  DEPARTMENTS_TYPES_OPTIONS,
+  TRADITIONAL_DEPT_DB_ID,
+};

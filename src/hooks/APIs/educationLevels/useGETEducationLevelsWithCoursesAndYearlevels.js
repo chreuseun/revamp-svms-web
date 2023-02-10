@@ -12,8 +12,9 @@ const useGETEducationLevelsWithCoursesAndYearlevels = () => {
     useHTTPGet({
       url: ENDPOINTS.EDUCATION_LEVELS.GET_EDUCATION_COURSE_YEARLEVEL,
       onCompleted: data => {
-        setCourses(data?.data?.course || []);
-        setYearlevels(data?.data?.yearlevel || []);
+        const courseYearlevelData = data?.data?.data || {};
+        setCourses(courseYearlevelData?.course || []);
+        setYearlevels(courseYearlevelData?.yearlevel || []);
       },
       onError: error => {
         notification.error({

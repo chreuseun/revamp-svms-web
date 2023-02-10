@@ -10,7 +10,7 @@ const useGETEducationLevels = () => {
   const { isGETRequestLoading: isGETEducationLevels, runHTTPGetRequest } = useHTTPGet({
     url: ENDPOINTS.EDUCATION_LEVELS.GET_EDUCATION_LEVELS,
     onCompleted: data => {
-      setEducationLevels(data?.data || []);
+      setEducationLevels(data?.data?.data || []);
     },
     onError: error => {
       notification.error({

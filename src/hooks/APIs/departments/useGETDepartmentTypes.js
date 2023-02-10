@@ -10,7 +10,7 @@ const useGETDepartmentTypes = () => {
   const { isGETRequestLoading: isGETDepartmentTypesLoading, runHTTPGetRequest } = useHTTPGet({
     url: ENDPOINTS.DEPARTMENTS.GET_DEPT_TYPES,
     onCompleted: data => {
-      setDepartmentTypes(data?.data || []);
+      setDepartmentTypes(data?.data?.data || []);
     },
     onError: error => {
       notification.error({
