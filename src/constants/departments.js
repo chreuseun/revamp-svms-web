@@ -62,9 +62,9 @@ const ADD_DEPARTMENTS_FORM_INPUTS = {
     label: 'What branch?',
     name: 'department_traditional_types',
     placeholder: 'Select a type',
-    rules: [{ required: true, message: 'field is required' }],
+    rules: [{ required: true, message: 'Field is required' }],
     selectOptions: DEPARTMENTS_TRADITIONAL_OPTIONS,
-    displayedWhen: [DEPARTMENTS_TYPES.traditional],
+    displayWhen: [DEPARTMENTS_TYPES.traditional.value],
   },
   ACADEMIC_LEVEL: {
     label: 'Academic Level',
