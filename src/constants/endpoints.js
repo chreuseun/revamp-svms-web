@@ -18,6 +18,13 @@ const ENDPOINTS = {
     ADD: `/v2/account/add`,
     GET_ACCOUNTS: `/v2/account/accounts`,
   },
+  DEPARTMENTS: {
+    GET_DEPT_TYPES: `/v2/departments/types`,
+  },
+  EDUCATION_LEVELS: {
+    GET_EDUCATION_LEVELS: `/v2/education_levels`,
+    GET_EDUCATION_COURSE_YEARLEVEL: `/v2/education_levels/course_with_yearlevel`,
+  },
 };
 
 export { DEFAULT_BASE_URL, ENDPOINTS };

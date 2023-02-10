@@ -1,21 +1,40 @@
-import React from 'react';
-import { Form, Input, Select, Button, Typography } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Input, Select, Button } from 'antd';
 
 import { ADD_DEPARTMENTS_FORM_INPUTS } from 'src/constants/departments';
-
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
+import { useGETDepartmentTypes } from 'src/hooks/APIs/departments';
+import {
+  useGETEducationLevels,
+  useGETEducationLevelsWithCoursesAndYearlevels,
+} from 'src/hooks/APIs/educationLevels';
 
 const { Option } = Select;
+const { useWatch } = Form;
 
 const AddDepartmentPage = () => {
   const [addDeptForm] = Form.useForm();
+  const selectedDepartmentType = useWatch(ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TYPES.name, addDeptForm);
+  const { runGETDepartmentTypes, isGETDepartmentTypesLoading } = useGETDepartmentTypes();
+  const { runGETEducationLevels } = useGETEducationLevels();
+  const { runGETEducationLevelsWithCoursesAndYearlevels } =
+    useGETEducationLevelsWithCoursesAndYearlevels();
+
+  useEffect(() => {
+    runGETDepartmentTypes();
+    runGETEducationLevels();
+    runGETEducationLevelsWithCoursesAndYearlevels();
+  }, []);
+
+  const showTraditionalDeptTypesSelect =
+    ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES.displayWhen.includes(selectedDepartmentType);
 
   const onSubmitForm = values => {
     console.log('--- ADD DEPT SUBMIT FORM: ', values);
   };
 
   return (
-    <DefaultContainer customStyles={styles.container} isLoading={false}>
+    <DefaultContainer customStyles={styles.container} isLoading={isGETDepartmentTypesLoading}>
       <NavigationSidebar />
       <PageContentContainer title="Add Department" containerStyles={styles.pageContentContainer}>
         <Form
@@ -37,17 +56,19 @@ const AddDepartmentPage = () => {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES}>
-            <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES.placeholder}>
-              {ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES.selectOptions.map(
-                ({ value, label }) => (
-                  <Option key={value} value={value}>
-                    {label}
-                  </Option>
-                ),
-              )}
-            </Select>
-          </Form.Item>
+          {!!showTraditionalDeptTypesSelect && (
+            <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES}>
+              <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES.placeholder}>
+                {ADD_DEPARTMENTS_FORM_INPUTS.DEPT_TRADITIONAL_TYPES.selectOptions.map(
+                  ({ value, label }) => (
+                    <Option key={value} value={value}>
+                      {label}
+                    </Option>
+                  ),
+                )}
+              </Select>
+            </Form.Item>
+          )}
           <Form.Item {...ADD_DEPARTMENTS_FORM_INPUTS.ACADEMIC_LEVEL}>
             <Select placeholder={ADD_DEPARTMENTS_FORM_INPUTS.ACADEMIC_LEVEL.placeholder}>
               {ADD_DEPARTMENTS_FORM_INPUTS.ACADEMIC_LEVEL.selectOptions.map(({ value, label }) => (
