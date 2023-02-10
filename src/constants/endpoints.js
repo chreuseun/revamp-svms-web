@@ -25,6 +25,9 @@ const ENDPOINTS = {
     GET_EDUCATION_LEVELS: `/v2/education_levels`,
     GET_EDUCATION_COURSE_YEARLEVEL: `/v2/education_levels/course_with_yearlevel`,
   },
+  COURSES: {
+    GET_ALL_COURSES_DETAILS: `/v2/courses`,
+  },
 };
 
 export { DEFAULT_BASE_URL, ENDPOINTS };

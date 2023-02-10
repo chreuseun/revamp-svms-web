@@ -17,4 +17,11 @@ const ACADEMIC_LEVELS = {
   },
 };
 
-export { ACADEMIC_LEVELS };
+const EDUCATION_LEVEL_IDS = {
+  GRADE_SCHOOL: 1,
+  JUNIOR_HS: 2,
+  SENIOR_HS: 3,
+  COLLEGE: 4,
+};
+
+export { ACADEMIC_LEVELS, EDUCATION_LEVEL_IDS };
