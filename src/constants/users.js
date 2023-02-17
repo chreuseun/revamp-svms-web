@@ -1,3 +1,8 @@
+import { Typography, Tag } from 'antd';
+import moment from 'moment';
+
+const { Text } = Typography;
+
 const ACCOUNT_TYPES = {
   ADMIN: 'ADMIN',
   USER: 'USER',
@@ -122,6 +127,41 @@ const SEARCH_USERS_OPTIONS = {
   ],
 };
 
+const USER_TABLE_COLUMNS = [
+  {
+    title: 'Name',
+    dataIndex: 'fullname',
+    key: 'fullname',
+    render: fullname => <Text>{fullname}</Text>,
+  },
+  {
+    title: 'Username',
+    dataIndex: 'username',
+    key: 'username',
+    render: username => <Text>{username}</Text>,
+  },
+  {
+    title: 'Status',
+    dataIndex: 'state',
+    key: 'state',
+    render: state =>
+      Number(state) ? <Tag color={'green'}>Active</Tag> : <Tag color={'red'}>Inactive</Tag>,
+  },
+  {
+    title: 'Locked',
+    dataIndex: 'is_locked',
+    key: 'is_locked',
+    render: isLocked =>
+      Number(isLocked) ? <Tag color={'red'}>Locked</Tag> : <Tag color={'green'}>Unlocked</Tag>,
+  },
+  {
+    title: 'Create At',
+    dataIndex: 'created_at',
+    key: 'created_at',
+    render: createdAt => <Text>{moment(createdAt).format('MMM DD, YYYY h:mm a')}</Text>,
+  },
+];
+
 export {
   ACCOUNT_TYPES,
   ADD_USER_FORM_INPUTS,
@@ -129,4 +169,5 @@ export {
   USER_TYPES_OPTIONS,
   SEARCH_USERS_OPTIONS,
   MANAGE_USER_INPUT_LABELS,
+  USER_TABLE_COLUMNS,
 };

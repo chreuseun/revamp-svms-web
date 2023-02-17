@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Select, Typography, DatePicker, notification } from 'antd';
 
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
 import { MANAGE_USER_INPUT_LABELS, SEARCH_USERS_OPTIONS } from 'src/constants/users';
 import { useGETAccountsByFilters } from 'src/hooks/APIs/account';
+import UsersTables from './UsersTables';
 
 const { Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -21,7 +22,16 @@ const ManageUsers = () => {
   const { isGETAccountsByFiltersLoading, runGETAccountsByFilters } = useGETAccountsByFilters({
     onCompleted: response => {
       const { data } = response;
-      setAccountsList(data?.data?.results || []);
+
+      const userArray = data?.data?.results || [];
+      const mapUsers = userArray.map(user => {
+        return {
+          key: user?.id,
+          ...user,
+        };
+      });
+
+      setAccountsList(mapUsers);
     },
     onError: err => {
       notification.error({
@@ -29,6 +39,10 @@ const ManageUsers = () => {
       });
     },
   });
+
+  useEffect(() => {
+    runGETAccountsByFilters({ params: {} });
+  }, []);
 
   const onChangeUserTypeId = val => {
     setByUserTypeId(val);
@@ -129,7 +143,7 @@ const ManageUsers = () => {
             padding: 16,
             overflow: 'scroll',
           }}>
-          <pre style={{ backgroundColor: '#DFDFDF' }}>{JSON.stringify(accountsList, null, 4)}</pre>
+          <UsersTables userData={accountsList} />
         </div>
       </PageContentContainer>
     </DefaultContainer>
