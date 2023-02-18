@@ -111,6 +111,10 @@ const AddDepartmentPage = () => {
   });
 
   const onSubmitForm = data => {
+    if (isPageLoading) {
+      return;
+    }
+
     runPOSTAddOneDepartment({ data });
   };
 
