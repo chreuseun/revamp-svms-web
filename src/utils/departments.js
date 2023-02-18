@@ -8,10 +8,16 @@ const { GRADE_SCHOOL, JUNIOR_HS, SENIOR_HS, COLLEGE } = EDUCATION_LEVEL_IDS;
 const getAcadDepartmentsOptions = ({ coursesByEducLevelId, selectedAcadLevel }) => {
   try {
     if (selectedAcadLevel === COLLEGE) {
-      return uniqBy(coursesByEducLevelId?.[`${COLLEGE}`], 'acad_dept').map(i => ({
+      const baseData = uniqBy(coursesByEducLevelId?.[`${COLLEGE}`], 'acad_dept').map(i => ({
         value: i.acad_dept,
         label: i.acad_dept,
       }));
+
+      const finalAcademicDeptOptions = baseData.length
+        ? [{ value: '*', label: '- All Academic Departments -' }, ...baseData]
+        : [];
+
+      return finalAcademicDeptOptions;
     }
   } catch {}
 
@@ -19,19 +25,27 @@ const getAcadDepartmentsOptions = ({ coursesByEducLevelId, selectedAcadLevel }) 
 };
 
 const getCourseOptions = ({ coursesByEducLevelId, selectedAcadLevel, selectedAcadDept }) => {
+  let data = [];
+  const allCoursesItem = { value: '*', label: '- All Courses -' };
+
+  if (selectedAcadDept === '*') {
+    return [allCoursesItem];
+  }
+
   try {
     if (selectedAcadLevel === COLLEGE) {
-      return coursesByEducLevelId?.[`${selectedAcadLevel}`]
+      data = coursesByEducLevelId?.[`${selectedAcadLevel}`]
         ?.filter(i => i.acad_dept === selectedAcadDept)
         ?.map(i => ({ value: i.id, label: i.label }));
     } else if (selectedAcadLevel === SENIOR_HS) {
-      return coursesByEducLevelId?.[`${selectedAcadLevel}`]
+      data = coursesByEducLevelId?.[`${selectedAcadLevel}`]
         ?.filter(i => i.educ_level_id === selectedAcadLevel)
         ?.map(i => ({ value: i.id, label: i.label }));
     }
   } catch {}
 
-  return [];
+  const finalData = data?.length ? [allCoursesItem, ...data] : [];
+  return finalData;
 };
 
 const getSelectYearlevels = ({ courseData = {} }) => {
@@ -46,13 +60,20 @@ const getSelectYearlevels = ({ courseData = {} }) => {
 };
 
 const getYearlevelOptions = ({ selectedAcadLevel, coursesByEducLevelId, selectedCourse }) => {
+  let data = [];
+  const allYearlevels = { value: '*', label: '- All Yearlevels -' };
+
+  if (selectedCourse === '*') {
+    return [allYearlevels];
+  }
+
   try {
     if ([GRADE_SCHOOL, JUNIOR_HS].includes(selectedAcadLevel)) {
-      return getSelectYearlevels({
+      data = getSelectYearlevels({
         courseData: coursesByEducLevelId?.[`${selectedAcadLevel}`]?.[0],
       });
     } else {
-      return getSelectYearlevels({
+      data = getSelectYearlevels({
         courseData: (coursesByEducLevelId?.[`${selectedAcadLevel}`] || [])?.find(
           i => i.id === selectedCourse,
         ),
@@ -60,7 +81,9 @@ const getYearlevelOptions = ({ selectedAcadLevel, coursesByEducLevelId, selected
     }
   } catch {}
 
-  return [];
+  const finalData = data?.length ? [allYearlevels, ...data] : [];
+
+  return finalData;
 };
 
 const showAcadDepartmentSelect = ({ educationLevelID = null }) => {
