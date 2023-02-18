@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select, Button, Modal } from 'antd';
 import { groupBy } from 'lodash';
 
 import {
@@ -8,7 +8,7 @@ import {
   EDUC_LEVEL_ID_KEY,
 } from 'src/constants/departments';
 import { NavigationSidebar, DefaultContainer, PageContentContainer } from 'src/components/common';
-import { useGETDepartmentTypes } from 'src/hooks/APIs/departments';
+import { useGETDepartmentTypes, usePOSTAddOneDepartment } from 'src/hooks/APIs/departments';
 import { useGETEducationLevels } from 'src/hooks/APIs/educationLevels';
 import { useGETAllCourses } from 'src/hooks/APIs/courses';
 import {
@@ -32,6 +32,8 @@ const {
   YEARLEVEL,
 } = ADD_DEPARTMENTS_FORM_INPUTS;
 
+const showTestUI = false;
+
 const AddDepartmentPage = () => {
   const {
     addDeptForm,
@@ -43,6 +45,22 @@ const AddDepartmentPage = () => {
     selectedDepartmentType,
     selectedYearLevel,
   } = useAddDepartmentForm();
+
+  const { isPOSTAddOneDepartment, runPOSTAddOneDepartment } = usePOSTAddOneDepartment({
+    onCompleted: () => {
+      addDeptForm.resetFields();
+
+      Modal.success({
+        title: 'Department successfully added',
+      });
+    },
+    onError: err => {
+      Modal.error({
+        title: 'Add Department Error:',
+        content: <div>{err}</div>,
+      });
+    },
+  });
 
   const testData = {
     textInputs: {
@@ -65,7 +83,10 @@ const AddDepartmentPage = () => {
   const { isGETAllCoursesLoading, runGETAllCourses, courseData } = useGETAllCourses();
 
   const isPageLoading =
-    isGETEducationLevels || isGETDepartmentTypesLoading || isGETAllCoursesLoading;
+    isGETEducationLevels ||
+    isGETDepartmentTypesLoading ||
+    isGETAllCoursesLoading ||
+    isPOSTAddOneDepartment;
 
   useEffect(() => {
     runGETDepartmentTypes();
@@ -89,15 +110,15 @@ const AddDepartmentPage = () => {
     selectedCourse,
   });
 
-  const onSubmitForm = values => {
-    console.log('--- ADD DEPT SUBMIT FORM: ', values);
+  const onSubmitForm = data => {
+    runPOSTAddOneDepartment({ data });
   };
 
   return (
     <DefaultContainer customStyles={styles.container} isLoading={isPageLoading}>
       <NavigationSidebar />
       <PageContentContainer title="Add Department" containerStyles={styles.pageContentContainer}>
-        <pre style={{ fontSize: 8 }}>{JSON.stringify(testData, null, 4)}</pre>
+        {showTestUI && <pre style={{ fontSize: 8 }}>{JSON.stringify(testData, null, 4)}</pre>}
         <Form
           form={addDeptForm}
           name={ADD_DEPARTMENT_FORM}

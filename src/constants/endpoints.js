@@ -20,6 +20,7 @@ const ENDPOINTS = {
   },
   DEPARTMENTS: {
     GET_DEPT_TYPES: `/v2/departments/types`,
+    ADD_ONE_DEPT: `/v2/departments/add`,
   },
   EDUCATION_LEVELS: {
     GET_EDUCATION_LEVELS: `/v2/education_levels`,
