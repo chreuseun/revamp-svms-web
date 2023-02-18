@@ -5,6 +5,7 @@ import AuthorizingLoadingPage from './AuthorizingLoadingPage';
 import AddUserPage from './AddUserPage';
 import ManageUsersPage from './ManageUsersPage';
 import AddDepartmentPage from './AddDepartmentPage';
+import ManageDepartmentsPage from './ManageDepartmentsPage';
 
 export {
   LoginPage,
@@ -14,4 +15,5 @@ export {
   AddUserPage,
   ManageUsersPage,
   AddDepartmentPage,
+  ManageDepartmentsPage,
 };
