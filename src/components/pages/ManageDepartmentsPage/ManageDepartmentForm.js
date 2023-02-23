@@ -1,4 +1,3 @@
-/* eslint-disable no-unreachable */
 import React, { useEffect, useState, useRef } from 'react';
 import { Form, Input, Select, Button, Modal, Spin, Switch } from 'antd';
 import { groupBy } from 'lodash';
@@ -9,7 +8,7 @@ import {
   ADD_DEPARTMENT_FORM,
   EDUC_LEVEL_ID_KEY,
 } from 'src/constants/departments';
-import { useGETDepartmentTypes, usePOSTAddOneDepartment } from 'src/hooks/APIs/departments';
+import { useGETDepartmentTypes, usePOSTDepartmentUpdate } from 'src/hooks/APIs/departments';
 import { useGETEducationLevels } from 'src/hooks/APIs/educationLevels';
 import { useGETAllCourses } from 'src/hooks/APIs/courses';
 import {
@@ -40,17 +39,25 @@ const ManageDepartmentForm = ({ departmentData = null }) => {
   const [isDoneSettingInitialval, setIsDoneSettingInitialVal] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  const { isPOSTAddOneDepartment, runPOSTAddOneDepartment } = usePOSTAddOneDepartment({
-    onCompleted: () => {
-      addDeptForm.resetFields();
+  const { isPOSTUpdateDepartmentLoading, runPOSTUpdateOneDepartment } = usePOSTDepartmentUpdate({
+    onCompleted: response => {
+      const { success, error_message: errMsg = '' } = response?.data || {};
 
-      Modal.success({
-        title: 'Department successfully added',
-      });
+      if (success) {
+        Modal.success({
+          title: 'Department updated added',
+          onOk: () => window.location.reload(),
+        });
+      } else {
+        Modal.error({
+          title: 'Update Department Error:',
+          content: <div>{errMsg}</div>,
+        });
+      }
     },
     onError: err => {
       Modal.error({
-        title: 'Add Department Error:',
+        title: 'Update Department Error:',
         content: <div>{err}</div>,
       });
     },
@@ -67,7 +74,7 @@ const ManageDepartmentForm = ({ departmentData = null }) => {
     isGETEducationLevels ||
     isGETDepartmentTypesLoading ||
     isGETAllCoursesLoading ||
-    isPOSTAddOneDepartment;
+    isPOSTUpdateDepartmentLoading;
 
   const {
     addDeptForm,
@@ -144,7 +151,12 @@ const ManageDepartmentForm = ({ departmentData = null }) => {
       return;
     }
 
-    runPOSTAddOneDepartment({ data });
+    const composeData = {
+      ...data,
+      department_id: departmentData?.id,
+    };
+
+    runPOSTUpdateOneDepartment({ data: composeData });
   };
 
   const onChangeStatus = val => setIsActive(val);
