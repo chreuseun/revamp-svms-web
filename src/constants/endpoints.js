@@ -22,6 +22,7 @@ const ENDPOINTS = {
     GET_DEPT_TYPES: `/v2/departments/types`,
     ADD_ONE_DEPT: `/v2/departments/add`,
     GET_DEPTS_BY_FILTER: `/v2/departments`,
+    UPDATE_DEPT: `/v2/departments/update`,
   },
   EDUCATION_LEVELS: {
     GET_EDUCATION_LEVELS: `/v2/education_levels`,

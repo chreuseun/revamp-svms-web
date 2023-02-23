@@ -57,6 +57,12 @@ const ADD_DEPARTMENTS_FORM_INPUTS = {
     name: 'head_officer',
     rules: [{ required: true, message: 'Field is required' }],
   },
+  STATUS: {
+    label: 'Status',
+    name: 'status',
+    valuePropName: 'status',
+    rules: [{ required: true, message: 'Field is required' }],
+  },
 };
 
 const ADD_DEPARTMENT_FORM = `add-new-department-form`;

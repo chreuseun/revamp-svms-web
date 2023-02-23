@@ -14,7 +14,7 @@ const {
   YEARLEVEL,
 } = ADD_DEPARTMENTS_FORM_INPUTS;
 
-const useAddDepartmentForm = () => {
+const useAddDepartmentForm = ({ isShouldRunUserOnChange = true } = {}) => {
   const [addDeptForm] = useForm();
 
   // INPUT
@@ -32,6 +32,10 @@ const useAddDepartmentForm = () => {
 
   // when selectedAcadLevel is changed then clear this fields
   useEffect(() => {
+    if (!isShouldRunUserOnChange) {
+      return;
+    }
+
     addDeptForm.setFieldsValue({
       academic_department: null,
       course: null,
@@ -41,6 +45,10 @@ const useAddDepartmentForm = () => {
 
   // when selectedAcadDept is changed then clear this fields
   useEffect(() => {
+    if (!isShouldRunUserOnChange) {
+      return;
+    }
+
     addDeptForm.setFieldsValue({
       course: null,
       yearlevel: null,
@@ -49,6 +57,10 @@ const useAddDepartmentForm = () => {
 
   // when selectedCourse is changed then clear this fields
   useEffect(() => {
+    if (!isShouldRunUserOnChange) {
+      return;
+    }
+
     addDeptForm.setFieldsValue({
       yearlevel: null,
     });
