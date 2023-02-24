@@ -23,6 +23,9 @@ const ENDPOINTS = {
     ADD_ONE_DEPT: `/v2/departments/add`,
     GET_DEPTS_BY_FILTER: `/v2/departments`,
     UPDATE_DEPT: `/v2/departments/update`,
+    DEACTIVATE_USER_TO_DEPT: `v2/departments/account/deactivate`,
+    ACTIVATE_USER_TO_DEPT: `v2/departments/account/activate`,
+    GET_ACCOUNTS_IN_DEPT_ID: `/v2/departments/accounts`,
   },
   EDUCATION_LEVELS: {
     GET_EDUCATION_LEVELS: `/v2/education_levels`,

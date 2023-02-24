@@ -19,6 +19,7 @@ import {
   getYearlevelOptions,
 } from 'src/utils/departments';
 import { useAddDepartmentForm } from 'src/hooks/antdForms';
+import ManageDepartmentsUserModal from './ManageDepartmentsUserModal';
 
 const { Option } = Select;
 
@@ -38,6 +39,7 @@ const showTestUI = false;
 const ManageDepartmentForm = ({ departmentData = null }) => {
   const [isDoneSettingInitialval, setIsDoneSettingInitialVal] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [openManageUsers, setOpenManageUsers] = useState(false);
 
   const { isPOSTUpdateDepartmentLoading, runPOSTUpdateOneDepartment } = usePOSTDepartmentUpdate({
     onCompleted: response => {
@@ -163,6 +165,16 @@ const ManageDepartmentForm = ({ departmentData = null }) => {
 
   return (
     <Spin spinning={isPageLoading}>
+      <Button
+        onClick={() => {
+          setOpenManageUsers(true);
+        }}
+        disabled={false}
+        type="default"
+        style={{ margin: '10px 0px' }}
+        htmlType={'submit'}>
+        Manage Users
+      </Button>
       <div
         style={{
           flexGrow: 1,
@@ -252,6 +264,15 @@ const ManageDepartmentForm = ({ departmentData = null }) => {
           </Form.Item>
         </Form>
       </div>
+      {openManageUsers && (
+        <ManageDepartmentsUserModal
+          open={openManageUsers}
+          onCancel={() => setOpenManageUsers(false)}
+          onOk={() => setOpenManageUsers(true)}
+          modalTitle="Manage Department User"
+          departmentData={departmentData}
+        />
+      )}
     </Spin>
   );
 };
