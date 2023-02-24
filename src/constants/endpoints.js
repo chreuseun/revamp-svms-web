@@ -1,14 +1,14 @@
 const heroku = 'https://dev-svms-express-server.herokuapp.com';
-const local = 'http://192.168.100.2:3000';
-const DEFAULT_BASE_URL = local; // heroku || local;
+// const local = 'http://192.168.100.2:3000';
+const DEFAULT_BASE_URL = heroku; // heroku || local;
 
 // ENDPOINTS LIST
 const ENDPOINTS = {
   LOGIN: {
-    API_LOGIN: '/api/login', // login enter `username` & `password` check user if exisit in account
+    API_LOGIN: '/api/login',
   },
   ACADEMIC_YEAR: {
-    API_ACADYEAR_GET: '/api/acad_year/get', // get acadamic years
+    API_ACADYEAR_GET: '/api/acad_year/get',
   },
   AUTH: {
     API_AUTH: '/api/auth',
