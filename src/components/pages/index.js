@@ -6,6 +6,7 @@ import AddUserPage from './AddUserPage';
 import ManageUsersPage from './ManageUsersPage';
 import AddDepartmentPage from './AddDepartmentPage';
 import ManageDepartmentsPage from './ManageDepartmentsPage';
+import ManageSemestersPage from './ManageSemestersPage';
 
 export {
   LoginPage,
@@ -16,4 +17,5 @@ export {
   ManageUsersPage,
   AddDepartmentPage,
   ManageDepartmentsPage,
+  ManageSemestersPage,
 };
