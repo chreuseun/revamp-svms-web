@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Spin, notification, Table, Switch, Typography, Tag } from 'antd';
+import { Modal, Spin, notification, Table, Switch, Typography } from 'antd';
 import PropTypes from 'prop-types';
 
-import { useGETAccountsByFilters } from 'src/hooks/APIs/account';
 import {
   usePOSTActivateUserToDepartment,
   usePOSTDeactivateUserToDepartment,
+  useGETDepartmentWithAccount,
 } from 'src/hooks/APIs/departments';
 
 const { Text } = Typography;
@@ -14,7 +14,9 @@ const columns = ({ onActivatorSwitchChanged = () => () => {} } = {}) => [
   {
     title: 'Is Active',
     key: 'is-active',
-    render: (_, record) => <Switch onChange={onActivatorSwitchChanged(record)} />,
+    render: (_, record) => (
+      <Switch checked={!!record?.department_id} onChange={onActivatorSwitchChanged(record)} />
+    ),
   },
   {
     title: 'Name',
@@ -28,13 +30,6 @@ const columns = ({ onActivatorSwitchChanged = () => () => {} } = {}) => [
     key: 'username',
     render: text => <Text>{text}</Text>,
   },
-  {
-    title: 'Account State',
-    dataIndex: 'state',
-    key: 'state',
-    render: state =>
-      Number(state) ? <Tag color={'green'}>Active</Tag> : <Tag color={'red'}>Inactive</Tag>,
-  },
 ];
 
 const ManageDepartmentsUserModal = ({
@@ -47,18 +42,6 @@ const ManageDepartmentsUserModal = ({
   const { id: departmentID = null } = departmentData || {};
 
   const [accounts, setAccounts] = useState([]);
-  const { isGETAccountsByFiltersLoading, runGETAccountsByFilters } = useGETAccountsByFilters({
-    onCompleted: response => {
-      const results = response?.data?.data?.results || [];
-
-      setAccounts(results);
-    },
-    onError: err => {
-      notification.error({
-        message: err,
-      });
-    },
-  });
 
   const { isPOSTDeactivateUserToDepartmentLoading, runDeactivateUserToDepartment } =
     usePOSTDeactivateUserToDepartment({
@@ -66,6 +49,14 @@ const ManageDepartmentsUserModal = ({
         notification.error({
           message: `Deactivation to Department: ${err}`,
         });
+      },
+      onCompleted: response => {
+        if (response?.data?.success) {
+          runGETDepartmentWithAccount({
+            departmentID,
+            userTypeIDs: ['USER'],
+          });
+        }
       },
     });
 
@@ -76,25 +67,50 @@ const ManageDepartmentsUserModal = ({
           message: `Activation to Department: ${err}`,
         });
       },
+      onCompleted: response => {
+        if (response?.data?.success) {
+          runGETDepartmentWithAccount({
+            departmentID,
+            userTypeIDs: ['USER'],
+          });
+        }
+      },
+    });
+
+  const { isGETDepartmentWithAccountLoading, runGETDepartmentWithAccount } =
+    useGETDepartmentWithAccount({
+      onCompleted: response => {
+        const userList = response?.data?.data || [];
+        setAccounts(userList);
+      },
+      onError: err => {
+        notification.error({
+          description: `Fetching accounts with department: ${err}`,
+        });
+      },
     });
 
   useEffect(() => {
-    runGETAccountsByFilters({ params: {} });
+    runGETDepartmentWithAccount({
+      departmentID,
+      userTypeIDs: ['USER'],
+    });
   }, []);
 
   const onActivatorSwitchChanged = userRecord => checkValue => {
+    const userAccountID = userRecord?.account_id || null;
+
     if (checkValue) {
       runPOSTActivateUserToDepartment({
-        accountID: userRecord?.id || null,
+        accountID: userAccountID,
         departmentID,
       });
     } else {
       runDeactivateUserToDepartment({
-        accountID: userRecord?.id || null,
+        accountID: userAccountID,
         departmentID,
       });
     }
-    console.log('---- ', { account_id: userRecord?.id, checkValue, departmentID });
   };
 
   const renderColumns = columns({
@@ -102,7 +118,7 @@ const ManageDepartmentsUserModal = ({
   });
 
   const isSpinning =
-    isGETAccountsByFiltersLoading ||
+    isGETDepartmentWithAccountLoading ||
     isPOSTDeactivateUserToDepartmentLoading ||
     isPOSTActivateUserToDepartment;
 

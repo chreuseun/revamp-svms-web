@@ -4,6 +4,7 @@ import useGETDepartmentsByFilter from './useGETDepartmentsByFilter';
 import usePOSTDepartmentUpdate from './usePOSTDepartmentUpdate';
 import usePOSTDeactivateUserToDepartment from './usePOSTDeactivateUserToDepartment';
 import usePOSTActivateUserToDepartment from './usePOSTActivateUserToDepartment';
+import useGETDepartmentWithAccount from './useGETDepartmentWithAccount';
 
 export {
   useGETDepartmentTypes,
@@ -12,4 +13,5 @@ export {
   usePOSTDepartmentUpdate,
   usePOSTDeactivateUserToDepartment,
   usePOSTActivateUserToDepartment,
+  useGETDepartmentWithAccount,
 };
