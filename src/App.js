@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 
-import { RouterProvider } from 'react-router-dom';
-import publicRoutes from 'src/routes/public/publicRouter';
+import store from 'src/redux/store';
+import RoutedApp from 'src/RoutedApp';
+import packageJSON from '../package.json';
 
-const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    console.log('--- CHECING AUTORIZATION');
-    setIsLoading(false);
-  }, []);
-
-  if (isLoading) {
-    console.log('-- DISPLAY LOADING PROMPT');
-  }
-
-  return <RouterProvider router={publicRoutes} />;
-};
+const App = () => (
+  <Provider store={store}>
+    <div style={{ fontSize: 7, position: 'absolute', bottom: 0, right: 0 }}>
+      {process.env?.NODE_ENV || ''}@{packageJSON?.version}
+    </div>
+    <RoutedApp />
+  </Provider>
+);
 
 export default App;

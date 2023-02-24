@@ -16,6 +16,28 @@ const LOGIN_FORM = {
   },
 };
 
-const LOGIN_PAGE_TITLE = 'SVMS';
+const LOGIN_PAGE_TITLE = `iCLEAR with SDRM`;
 
-export { LOGIN_FORM, LOGIN_PAGE_TITLE };
+const LOGIN_API_MESSAGE = {
+  SUCCESS: {
+    message: `Login Sucessful`,
+    placement: 'top',
+  },
+  ERROR: {
+    ERROR_API: {
+      message: `Login Authorization`,
+      placement: 'top',
+    },
+    ERROR_CATCH: {
+      message: `Login Error`,
+      placement: 'top',
+    },
+  },
+  WARNING: {
+    message: `Login Invalid`,
+    description: `Login invalid`,
+    placement: 'top',
+  },
+};
+
+export { LOGIN_FORM, LOGIN_PAGE_TITLE, LOGIN_API_MESSAGE };
