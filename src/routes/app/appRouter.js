@@ -8,6 +8,7 @@ import {
   AddDepartmentPage,
   ManageDepartmentsPage,
   ManageSemestersPage,
+  ManageAcademicYearPage,
 } from 'src/components/pages';
 import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
 
@@ -40,6 +41,11 @@ const appRouter = createBrowserRouter([
   {
     path: NAVIGATION_BAR_IDS.ADMIN.ADMIN_MANAGE_SEMESTERS,
     element: <ManageSemestersPage />,
+    caseSensitive: true,
+  },
+  {
+    path: NAVIGATION_BAR_IDS.ADMIN.ADMIN_MANAGE_ACADEMIC_YEARS,
+    element: <ManageAcademicYearPage />,
     caseSensitive: true,
   },
   {

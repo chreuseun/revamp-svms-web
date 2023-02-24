@@ -7,6 +7,7 @@ import ManageUsersPage from './ManageUsersPage';
 import AddDepartmentPage from './AddDepartmentPage';
 import ManageDepartmentsPage from './ManageDepartmentsPage';
 import ManageSemestersPage from './ManageSemestersPage';
+import ManageAcademicYearPage from './ManageAcademicYearPage';
 
 export {
   LoginPage,
@@ -18,4 +19,5 @@ export {
   AddDepartmentPage,
   ManageDepartmentsPage,
   ManageSemestersPage,
+  ManageAcademicYearPage,
 };
