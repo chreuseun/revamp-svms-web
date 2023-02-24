@@ -28,9 +28,11 @@ const NavigationSidebar = () => {
   const RenderCollapseIcon = () => (isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />);
 
   const onClickMenu = e => {
-    console.log('---- MENU CLICKED: ', e);
+    console.log('---- MENU CLICKED: ', e?.key);
 
-    if (e?.key === 'collapse') {
+    const doNothingKeys = ['logout', 'collapse'];
+
+    if (doNothingKeys.includes(e?.key)) {
       return;
     }
 
