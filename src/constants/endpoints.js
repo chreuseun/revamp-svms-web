@@ -36,6 +36,7 @@ const ENDPOINTS = {
   },
   SEMESTERS: {
     GET_ALL_SEMESTERS: `/v2/semesters`,
+    SET_ACTIVE_SEMESTER: `/v2/semesters/set`,
   },
 };
 
