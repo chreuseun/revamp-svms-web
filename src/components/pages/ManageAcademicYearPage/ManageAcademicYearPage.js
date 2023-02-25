@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { notification, Table, Typography, Tag, Button, Input, Modal } from 'antd';
 
-import { useGETAllAcademicYears, usePOSTAddAcademicYears } from 'src/hooks/APIs/academicYears';
+import {
+  useGETAllAcademicYears,
+  usePOSTAddAcademicYears,
+  usePOSTUpdateOneAcademicYear,
+} from 'src/hooks/APIs/academicYears';
 import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
 
 const { Text } = Typography;
@@ -82,24 +86,44 @@ const ManageAcademicYearPage = () => {
     },
   });
 
-  const isPageLoading = isGETAllAcademicYearsLoading || isPOSTAddAcademicYearsLoading;
+  const { isPOSTUpdateOnceAcademicYear, runPOSTUpdateOneAcademicYear } =
+    usePOSTUpdateOneAcademicYear({
+      onCompleted: response => {
+        const { success, error_message: errMsg } = response?.data || {};
+
+        if (success) {
+          runGETAllAcademicYears();
+          setAddInputSY(null);
+
+          Modal.success({
+            content: `Update successful`,
+          });
+        } else {
+          notification.error({
+            description: 'Add Academic Year Error .1',
+            message: `${errMsg}`,
+          });
+        }
+      },
+      onError: err => {
+        notification.error({
+          description: 'Add Academic Year Error .1',
+          message: `${err}`,
+        });
+      },
+    });
+
+  const isPageLoading =
+    isGETAllAcademicYearsLoading || isPOSTAddAcademicYearsLoading || isPOSTUpdateOnceAcademicYear;
 
   const onActivateAcademicYear = record => () => {
     if (isPageLoading) {
       return;
     }
 
-    const { id, is_active: isActive = null } = record || {};
+    const { id = null } = record || {};
 
-    if (isActive) {
-      console.log('--- TO FALSE: ', {
-        id,
-      });
-    } else {
-      console.log('--- TO TRUE: ', {
-        id,
-      });
-    }
+    runPOSTUpdateOneAcademicYear({ id, isActive: 1 });
   };
 
   const onCreateNewAcademicYear = () => {

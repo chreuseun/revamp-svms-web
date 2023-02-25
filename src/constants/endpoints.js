@@ -41,6 +41,7 @@ const ENDPOINTS = {
   ACADEMIC_YEARS: {
     GET_ALL_ACADEMIC_YEARS: `/v2/academic_years`,
     ADD_ACADEMIC_YEAR: `/v2/academic_years/add`,
+    UPDATE_ACADEMIC_YEAR: `/v2/academic_years/update`,
   },
 };
 
