@@ -8,6 +8,8 @@ import AddDepartmentPage from './AddDepartmentPage';
 import ManageDepartmentsPage from './ManageDepartmentsPage';
 import ManageSemestersPage from './ManageSemestersPage';
 import ManageAcademicYearPage from './ManageAcademicYearPage';
+import UploadStudentPage from './UploadStudentPage';
+import StudentsRecordsPage from './StudentsRecordsPage';
 
 export {
   LoginPage,
@@ -20,4 +22,6 @@ export {
   ManageDepartmentsPage,
   ManageSemestersPage,
   ManageAcademicYearPage,
+  UploadStudentPage,
+  StudentsRecordsPage,
 };

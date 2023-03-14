@@ -1,5 +1,5 @@
 // const heroku = 'https://dev-svms-express-server.herokuapp.com';
-const local = 'http://192.168.1.13:3000';
+const local = 'http://192.168.100.2:3000';
 const DEFAULT_BASE_URL = local; // heroku || local;
 
 // ENDPOINTS LIST
