@@ -7,7 +7,7 @@ const UpdateStudentPage = () => {
     <DefaultContainer customStyles={styles.container} isLoading={false}>
       <NavigationSidebar />
       <PageContentContainer
-        title="Update Student Records"
+        title="Student Records"
         containerStyles={styles.pageContentContainer}></PageContentContainer>
     </DefaultContainer>
   );
