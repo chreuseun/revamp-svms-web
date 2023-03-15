@@ -1,6 +1,6 @@
-const heroku = 'https://dev-svms-express-server.herokuapp.com';
-// const local = 'http://192.168.100.2:3000';
-const DEFAULT_BASE_URL = heroku; // heroku || local;
+// const heroku = 'https://dev-svms-express-server.herokuapp.com';
+const local = 'http://192.168.100.2:3000';
+const DEFAULT_BASE_URL = local; // heroku || local;
 
 // ENDPOINTS LIST
 const ENDPOINTS = {
@@ -33,6 +33,15 @@ const ENDPOINTS = {
   },
   COURSES: {
     GET_ALL_COURSES_DETAILS: `/v2/courses`,
+  },
+  SEMESTERS: {
+    GET_ALL_SEMESTERS: `/v2/semesters`,
+    SET_ACTIVE_SEMESTER: `/v2/semesters/set`,
+  },
+  ACADEMIC_YEARS: {
+    GET_ALL_ACADEMIC_YEARS: `/v2/academic_years`,
+    ADD_ACADEMIC_YEAR: `/v2/academic_years/add`,
+    UPDATE_ACADEMIC_YEAR: `/v2/academic_years/update`,
   },
 };
 
