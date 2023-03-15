@@ -43,6 +43,9 @@ const ENDPOINTS = {
     ADD_ACADEMIC_YEAR: `/v2/academic_years/add`,
     UPDATE_ACADEMIC_YEAR: `/v2/academic_years/update`,
   },
+  STUDENTS: {
+    BULK_UPSERT_STUDENTS: `/v2/student/bulk-insert`,
+  },
 };
 
 export { DEFAULT_BASE_URL, ENDPOINTS };
