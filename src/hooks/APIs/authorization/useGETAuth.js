@@ -1,5 +1,6 @@
 import useHTTPGet from 'src/hooks/APIs/useHTTPGet';
 import { ENDPOINTS } from 'src/constants/endpoints';
+import { USER_DETAILS } from 'src/constants/localStorage';
 
 const { AUTH } = ENDPOINTS;
 
@@ -10,6 +11,7 @@ const useGETAuth = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
       const { data } = response;
       const { msg = '', user_details: userDetails = {} } = data || {};
       if (onCompleted) {
+        localStorage.setItem(USER_DETAILS, JSON.stringify(userDetails));
         onCompleted({ userDetails, msg });
       }
 
