@@ -1,6 +1,8 @@
-const heroku = 'https://dev-svms-express-server.herokuapp.com';
+import buildConfig from 'src/buildConfig';
+
+// const heroku = 'https://dev-svms-express-server.herokuapp.com';
 // const local = 'http://192.168.100.2:3000';
-const DEFAULT_BASE_URL = `http://192.168.100.2:3000`; // heroku || local;
+const DEFAULT_BASE_URL = buildConfig?.BASE_URL; // heroku || local;
 
 // ENDPOINTS LIST
 const ENDPOINTS = {

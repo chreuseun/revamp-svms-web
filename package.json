@@ -21,14 +21,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "sh build_generator.development.sh",
     "build": "sh build_generator.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "generateBuild": "react-scripts build"
+    "generateBuild": "react-scripts build",
+    "startDevelopment": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [

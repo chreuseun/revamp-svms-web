@@ -16,10 +16,7 @@ console.log('--- #1 BASE CONFIG: ', configContents);
 configContents = configContents.replace(BUILD_DATE_PLACEHOLDER, new Date().getTime());
 console.log(`--- #2 REPLACING ${BUILD_DATE_PLACEHOLDER}: `, configContents);
 
-configContents = configContents.replace(
-  BASE_URL_PLACEHOLDER,
-  'https://dev-svms-express-server.herokuapp.com',
-);
+configContents = configContents.replace(BASE_URL_PLACEHOLDER, 'http://192.168.100.2:3000');
 console.log(`--- #3 REPLACING ${BASE_URL_PLACEHOLDER}: `, configContents);
 
 fs.writeFileSync(fileName, configContents, function (err) {
