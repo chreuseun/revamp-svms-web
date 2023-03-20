@@ -14,7 +14,6 @@ const UploadStudentCSVForm = () => {
 
   const { csvData, isImportingCSV, onImportFileHandler, setCSVData } = useCSVImporter();
   const studentRecordCount = csvData?.rows?.length || 0;
-  const columnNames = csvData?.columnNames || [];
 
   const { isPOSTBulkUpsertStudentsLoading, runPOSTBulkUpsertStudents } = usePOSTBulkUpsertStudents({
     onCompleted: data => {
@@ -74,14 +73,6 @@ const UploadStudentCSVForm = () => {
   return (
     <Spin spinning={isPageLoading}>
       <div style={styles.container}>
-        {/* <div>
-          <Typography.Text type="success">Column names:</Typography.Text>
-          <div style={{ marginLeft: 16 }}>
-            {columnNames.map(col => (
-              <div key={col}>{col || ''}</div>
-            ))}
-          </div>
-        </div> */}
         <Typography.Text type="success">Record count:</Typography.Text>
         <div style={{ marginLeft: 16 }}>{studentRecordCount}</div>
         <Form form={uploadStudentRecordsForm} name={FORM_NAME} onFinish={onFinish}>
