@@ -12,7 +12,7 @@ const appRouter = createBrowserRouter([
     caseSensitive: true,
   },
   {
-    path: '/user/my-departments',
+    path: NAVIGATION_BAR_IDS.USER.USER_MY_DEPARTMENTS_LIST,
     element: <MyDepartmentsListPage />,
     caseSensitive: true,
   },
