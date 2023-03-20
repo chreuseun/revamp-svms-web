@@ -102,7 +102,26 @@ const ADMIN_NAVIGATION_BAR_DATA = [
   },
 ];
 
-const USER_NAVIGATION_BAR_DATA = [];
+const USER_NAVIGATION_BAR_DATA = [
+  {
+    key: 'USER_USER_1',
+    icon: <UserOutlined />,
+    label: 'USER 1',
+    children: [
+      {
+        key: 'USER_OPTION_1',
+        icon: <UsergroupAddOutlined />,
+        label: 'USER OPTION 1',
+        to: 'user-option-1',
+      },
+      {
+        key: 'USER_OPTION_2',
+        icon: <UserSwitchOutlined />,
+        label: 'user-option-2',
+      },
+    ],
+  },
+];
 
 const SUBJECT_TEACHER_NAVIGATION_BAR_DATA = [];
 
