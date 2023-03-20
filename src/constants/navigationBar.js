@@ -28,6 +28,9 @@ const NAVIGATION_BAR_IDS = {
     ADMIN_UPLOAD_STUDENT_CSV: '/update-student-records',
     ADMIN_MANAGE_STUDENTS: '/student-records',
   },
+  USER: {
+    USER_MY_DEPARTMENTS_LIST: '/user/my-departments',
+  },
 };
 
 const ADMIN_NAVIGATION_BAR_DATA = [
@@ -104,22 +107,9 @@ const ADMIN_NAVIGATION_BAR_DATA = [
 
 const USER_NAVIGATION_BAR_DATA = [
   {
-    key: 'My Departments',
+    key: NAVIGATION_BAR_IDS.USER.USER_MY_DEPARTMENTS_LIST,
     icon: <GroupOutlined />,
-    label: 'USER 1',
-    children: [
-      {
-        key: 'USER_OPTION_1',
-        icon: <UsergroupAddOutlined />,
-        label: 'USER OPTION 1',
-        to: 'user-option-1',
-      },
-      {
-        key: 'USER_OPTION_2',
-        icon: <UserSwitchOutlined />,
-        label: 'user-option-2',
-      },
-    ],
+    label: 'My Departments',
   },
 ];
 
