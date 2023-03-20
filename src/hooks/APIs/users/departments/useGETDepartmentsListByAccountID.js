@@ -1,3 +1,5 @@
+import { notification } from 'antd';
+
 import useHTTPGet from 'src/hooks/APIs/useHTTPGet';
 import { USER_ENDPOINTS } from 'src/constants/endpoints';
 
@@ -6,7 +8,9 @@ const useGETDepartmentsListByAccountID = ({ onCompleted, onError } = {}) => {
     useHTTPGet({
       url: USER_ENDPOINTS.DEPARTMENTS.GET_DEPARTMENTS_LIST_BY_ACCOUNT_ID,
       onCompleted,
-      onError,
+      onError: error => {
+        notification.error({ message: `Get departments by account id: ${error}` });
+      },
     });
 
   const runGETDepartmentsListByAccountID = () => {
