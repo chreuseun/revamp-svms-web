@@ -1,33 +1,50 @@
+import { useDispatch } from 'react-redux';
+import { notification } from 'antd';
+
 import useHTTPGet from 'src/hooks/APIs/useHTTPGet';
 import { ENDPOINTS } from 'src/constants/endpoints';
-import { USER_DETAILS } from 'src/constants/localStorage';
-
-const { AUTH } = ENDPOINTS;
+import { updateAppReducer } from 'src/redux/reducers/appReducer';
 
 const useGETAuth = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
-  const { runHTTPGetRequest, isGETRequestLoading: isGETAuthLoading } = useHTTPGet({
-    url: AUTH.API_AUTH,
-    onCompleted: response => {
-      const { data } = response;
-      const { msg = '', user_details: userDetails = {} } = data || {};
-      if (onCompleted) {
-        localStorage.setItem(USER_DETAILS, JSON.stringify(userDetails));
-        onCompleted({ userDetails, msg });
-      }
+  const dispatch = useDispatch();
 
-      console.log('-- OKAY api/auth: ', response);
+  const { runHTTPGetRequest, isGETRequestLoading: isGETAuthLoading } = useHTTPGet({
+    url: ENDPOINTS.ACCOUNT.GET_ACCOUNT_AUTHORIZATION,
+    onCompleted: response => {
+      const { success, error_message: errMessage, data } = response?.data || {};
+
+      if (success) {
+        dispatch(updateAppReducer({ userDetails: data }));
+
+        if (onCompleted) {
+          onCompleted({ accountDetails: data, msg: errMessage });
+        }
+      } else {
+        notification.error({
+          message: `Get Authoziation Error: ${errMessage}`,
+        });
+      }
     },
     onError: error => {
+      notification.error({
+        message: `Get Authoziation Error: ${error}`,
+      });
+
       if (onError) {
         onError(error);
       }
-
-      console.log('-- ERR api/auth: ', error);
     },
   });
 
   const runGETAuth = async () => {
-    runHTTPGetRequest({ config: {}, headers: {} });
+    runHTTPGetRequest({
+      config: {
+        params: {
+          account_id: 135,
+        },
+      },
+      headers: {},
+    });
   };
 
   return {

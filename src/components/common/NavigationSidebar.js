@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Menu, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -6,20 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { initiateLogout } from 'src/utils/authorization';
 import { ADMIN_NAVIGATION_BAR_DATA } from 'src/constants/navigationBar';
 import { navigateToRoute } from 'src/utils/reactRouterDom';
-import { USER_DETAILS } from 'src/constants/localStorage';
+import { useGetAppStore } from 'src/hooks/redux';
 
 const NavigationSidebar = () => {
   const navigate = useNavigate();
   const [isCollapsed, setCollapsed] = useState(true);
-  const [userDetails, setUserDetails] = useState(null);
 
-  useEffect(() => {
-    const localStorageUserDetails = localStorage.getItem(USER_DETAILS);
-
-    try {
-      setUserDetails(JSON.parse(localStorageUserDetails));
-    } catch (err) {}
-  }, []);
+  const { userDetails } = useGetAppStore();
 
   const onCollapse = () => {
     setCollapsed(p => !p);
@@ -124,14 +117,6 @@ const NavigationSidebar = () => {
         ]}
       />
     </div>
-
-    /*
-  IF USER
-  
-  IF ADMIN 
-
-  IF SUBJECT
-*/
   );
 };
 export default NavigationSidebar;

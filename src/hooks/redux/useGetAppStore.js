@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 
 const useGetAppStore = () => {
-  const { isInitialLoading } = useSelector(({ appReducer = {} } = {}) => appReducer);
+  const { isInitialLoading, userDetails } = useSelector(({ appReducer = {} } = {}) => appReducer);
 
   return {
     isInitialLoading,
+    userDetails,
   };
 };
 

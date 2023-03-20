@@ -1,6 +1,6 @@
 const heroku = 'https://dev-svms-express-server.herokuapp.com';
 // const local = 'http://192.168.100.2:3000';
-const DEFAULT_BASE_URL = heroku; // heroku || local;
+const DEFAULT_BASE_URL = `http://192.168.100.2:3000`; // heroku || local;
 
 // ENDPOINTS LIST
 const ENDPOINTS = {
@@ -17,6 +17,7 @@ const ENDPOINTS = {
   ACCOUNT: {
     ADD: `/v2/account/add`,
     GET_ACCOUNTS: `/v2/account/accounts`,
+    GET_ACCOUNT_AUTHORIZATION: `/v2/account/get-authorization`,
   },
   DEPARTMENTS: {
     GET_DEPT_TYPES: `/v2/departments/types`,
