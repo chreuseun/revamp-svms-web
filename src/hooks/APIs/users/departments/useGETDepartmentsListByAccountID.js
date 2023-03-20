@@ -7,9 +7,27 @@ const useGETDepartmentsListByAccountID = ({ onCompleted, onError } = {}) => {
   const { isGETRequestLoading: isGETDepartmentsListByAccountIDLoading, runHTTPGetRequest } =
     useHTTPGet({
       url: USER_ENDPOINTS.DEPARTMENTS.GET_DEPARTMENTS_LIST_BY_ACCOUNT_ID,
-      onCompleted,
+      onCompleted: response => {
+        const {
+          data = [],
+          success = false,
+          error_message: errorMessage = null,
+        } = response?.data || {};
+
+        if (success) {
+          if (onCompleted) {
+            onCompleted(data);
+          }
+        } else {
+          notification.error({ message: `Get departments by account id: ${errorMessage}` });
+        }
+      },
       onError: error => {
         notification.error({ message: `Get departments by account id: ${error}` });
+
+        if (onError) {
+          onError(error);
+        }
       },
     });
 
