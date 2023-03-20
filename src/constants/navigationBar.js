@@ -104,8 +104,8 @@ const ADMIN_NAVIGATION_BAR_DATA = [
 
 const USER_NAVIGATION_BAR_DATA = [
   {
-    key: 'USER_USER_1',
-    icon: <UserOutlined />,
+    key: 'My Departments',
+    icon: <GroupOutlined />,
     label: 'USER 1',
     children: [
       {

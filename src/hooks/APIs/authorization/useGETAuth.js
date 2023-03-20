@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import useHTTPGet from 'src/hooks/APIs/useHTTPGet';
 import { ENDPOINTS } from 'src/constants/endpoints';
 import { updateAppReducer } from 'src/redux/reducers/appReducer';
+import { USER_DETAILS } from 'src/constants/localStorage';
 
 const useGETAuth = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const useGETAuth = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
       const { success, error_message: errMessage, data } = response?.data || {};
 
       if (success) {
+        localStorage.setItem(USER_DETAILS, JSON.stringify(data));
+
         dispatch(updateAppReducer({ userDetails: data }));
 
         if (onCompleted) {
