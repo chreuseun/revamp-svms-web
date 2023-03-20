@@ -51,4 +51,10 @@ const ENDPOINTS = {
   },
 };
 
-export { DEFAULT_BASE_URL, ENDPOINTS };
+const USER_ENDPOINTS = {
+  DEPARTMENTS: {
+    GET_DEPARTMENTS_LIST_BY_ACCOUNT_ID: '/v2/departments/account',
+  },
+};
+
+export { DEFAULT_BASE_URL, ENDPOINTS, USER_ENDPOINTS };
