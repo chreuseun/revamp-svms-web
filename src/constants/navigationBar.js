@@ -31,6 +31,8 @@ const NAVIGATION_BAR_IDS = {
   USER: {
     USER_MY_DEPARTMENTS_LIST: '/user/my-departments',
     USER_TRADITIONAL_DEPARTMENT: '/user/traditional-deptartment/:v2_department_id',
+    USER_CLEARANCE_FORMS: '/user/clearance-forms/:v2_department_id',
+    USER_CLEARANCE_ADD_FORM: '/user/add-clearance-form/:v2_department_id',
   },
 };
 
