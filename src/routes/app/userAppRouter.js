@@ -7,6 +7,7 @@ import {
   MyDepartmentsListPage,
   TraditionalDepartmentPage,
   DepartmentClearanceFormsPage,
+  DepartmentClearanceFormPage,
 } from 'src/components/pages/users';
 
 const appRouter = createBrowserRouter([
@@ -29,6 +30,11 @@ const appRouter = createBrowserRouter([
     path: NAVIGATION_BAR_IDS.USER.USER_CLEARANCE_FORMS,
     caseSensitive: true,
     element: <DepartmentClearanceFormsPage />,
+  },
+  {
+    path: NAVIGATION_BAR_IDS.USER.USER_CLEARANCE_ADD_FORM,
+    caseSensitive: true,
+    element: <DepartmentClearanceFormPage />,
   },
   {
     path: '*',
