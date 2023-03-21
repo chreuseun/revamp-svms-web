@@ -84,6 +84,7 @@ const styles = {
   },
   card: (bgColor = null) => ({
     backgroundColor: bgColor || '#ffd166',
+    cursor: 'pointer',
   }),
 };
 

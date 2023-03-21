@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import groupBy from 'lodash/groupBy';
 
 import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
 import { userAPIForDepartments } from 'src/hooks/APIs/users';
