@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Spin, Modal } from 'antd';
 
 import { useLocationState } from 'src/hooks/reactRouterDom';
+import { usePOSTAddOneDepartmentClearanceRequirement } from 'src/hooks/APIs/departmentClearance';
 
 const { useForm } = Form;
 
@@ -19,53 +20,64 @@ const FormDisabledDemo = () => {
   const { state } = useLocationState();
   const [form] = useForm();
 
-  const onFinish = values => {
-    // department_type_id
-    // educ_level_id
-    // v2_department_id
+  const { isPOSTAddOneDepartmentClearanceReqLoading, runPOSTAddOneDepartmentClearanceReq } =
+    usePOSTAddOneDepartmentClearanceRequirement({
+      onCompleted: () => {
+        Modal.success({
+          content: 'Department Clearance Requirement is added',
+          onOk: () => {
+            window.location.reload();
+          },
+        });
+      },
+    });
 
-    /*
-			v2_departments_id:114
-			initial_status:APPROVED
-			name:TEST_POST_MAN_1
-			description:desc_TEST_POST_MAN_1
-		*/
-    console.log('--- ON FINISH: ', { state, values });
+  const onFinish = values => {
+    const { description, initial_status: initialStatus, name } = values;
+
+    runPOSTAddOneDepartmentClearanceReq({
+      description,
+      initialStatus,
+      name,
+      v2DeptId: state?.v2_department_id,
+    });
   };
 
   return (
-    <Form style={{ maxWidth: 600 }} layout="horizontal" form={form} onFinish={onFinish}>
-      <Form.Item
-        label="Requirement Type"
-        name="requirement-type"
-        rules={[{ required: true, message: 'Field is required' }]}>
-        <Select options={SELECT_CLEARANCE_TYPE} />
-      </Form.Item>
-      <Form.Item
-        label="Initial Status"
-        name="initial-status"
-        rules={[{ required: true, message: 'Field is required' }]}>
-        <Select options={SELECT_INITIAL_STATUS} />
-      </Form.Item>
-      <Form.Item
-        label="Name"
-        name="name"
-        rules={[{ required: true, message: 'Field is required' }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Description"
-        name="description"
-        rules={[{ required: true, message: 'Field is required' }]}>
-        <Input />
-      </Form.Item>
+    <Spin spinning={isPOSTAddOneDepartmentClearanceReqLoading}>
+      <Form style={{ maxWidth: 600 }} layout="horizontal" form={form} onFinish={onFinish}>
+        <Form.Item
+          label="Requirement Type"
+          name="requirement_type"
+          rules={[{ required: true, message: 'Field is required' }]}>
+          <Select options={SELECT_CLEARANCE_TYPE} />
+        </Form.Item>
+        <Form.Item
+          label="Initial Status"
+          name="initial_status"
+          rules={[{ required: true, message: 'Field is required' }]}>
+          <Select options={SELECT_INITIAL_STATUS} />
+        </Form.Item>
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: 'Field is required' }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Description"
+          name="description"
+          rules={[{ required: true, message: 'Field is required' }]}>
+          <Input />
+        </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </Spin>
   );
 };
 

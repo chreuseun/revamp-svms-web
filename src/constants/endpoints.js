@@ -1,10 +1,7 @@
 import buildConfig from 'src/buildConfig';
 
-// const heroku = 'https://dev-svms-express-server.herokuapp.com';
-// const local = 'http://192.168.100.2:3000';
-const DEFAULT_BASE_URL = buildConfig?.BASE_URL; // heroku || local;
+const DEFAULT_BASE_URL = buildConfig?.BASE_URL;
 
-// ENDPOINTS LIST
 const ENDPOINTS = {
   LOGIN: {
     API_LOGIN: '/api/login',
@@ -48,6 +45,9 @@ const ENDPOINTS = {
   },
   STUDENTS: {
     BULK_UPSERT_STUDENTS: `/v2/student/bulk-insert`,
+  },
+  DEPARTMENT_CLEARANCE_REQUIREMENT: {
+    ADD_ONE_DEPARTMENT_CLEARANCE_RECORD: `/v2/department-clearance/add-one-record`,
   },
 };
 
