@@ -1,5 +1,5 @@
-const navigateToRoute = ({ navigate, routeName = '' }) => {
-  navigate(routeName);
+const navigateToRoute = ({ navigate, routeName = '', options = {} }) => {
+  navigate(routeName, options);
 };
 
 export { navigateToRoute };

@@ -1,3 +1,4 @@
 import MyDepartmentsListPage from './MyDepartmentsListPage';
+import TraditionalDepartmentPage from './TraditionalDepartmentPage';
 
-export { MyDepartmentsListPage };
+export { MyDepartmentsListPage, TraditionalDepartmentPage };

@@ -30,6 +30,7 @@ const NAVIGATION_BAR_IDS = {
   },
   USER: {
     USER_MY_DEPARTMENTS_LIST: '/user/my-departments',
+    USER_TRADITIONAL_DEPARTMENT: '/user/traditional-deptartment/:v2_department_id',
   },
 };
 

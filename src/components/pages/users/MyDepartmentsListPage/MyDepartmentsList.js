@@ -1,12 +1,27 @@
 import React from 'react';
 import { Row, Col, Card, Typography, Divider } from 'antd';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+
+import { navigateToRoute } from 'src/utils/reactRouterDom';
 
 import { DEPARTMENT_TYPES_CONFIG } from 'src/constants/departments';
+import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
 
 const MyDepartmentList = ({ groupedDepartmentList = [] }) => {
+  const navigate = useNavigate();
+
   const onClickDepartmentCard = details => () => {
-    console.log('--- CLICK DEPT CARD: ', details);
+    const { educ_level_id: eductLevelID } = details;
+
+    const baseRoute = NAVIGATION_BAR_IDS.USER.USER_TRADITIONAL_DEPARTMENT.split(':')?.[0];
+    const routeName = `${baseRoute}${eductLevelID}`;
+
+    navigateToRoute({
+      navigate,
+      routeName,
+      options: { state: details },
+    });
   };
 
   return (
