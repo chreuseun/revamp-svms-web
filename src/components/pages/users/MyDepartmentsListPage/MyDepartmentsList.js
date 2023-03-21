@@ -12,10 +12,10 @@ const MyDepartmentList = ({ groupedDepartmentList = [] }) => {
   const navigate = useNavigate();
 
   const onClickDepartmentCard = details => () => {
-    const { educ_level_id: eductLevelID } = details;
+    const { v2_department_id: departmentID } = details;
 
     const baseRoute = NAVIGATION_BAR_IDS.USER.USER_TRADITIONAL_DEPARTMENT.split(':')?.[0];
-    const routeName = `${baseRoute}${eductLevelID}`;
+    const routeName = `${baseRoute}${departmentID}`;
 
     navigateToRoute({
       navigate,

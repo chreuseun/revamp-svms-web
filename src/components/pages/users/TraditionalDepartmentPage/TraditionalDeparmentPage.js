@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
 import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
 import { useLocationState } from 'src/hooks/reactRouterDom';
+import { navigateToRoute } from 'src/utils/reactRouterDom';
+import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
+
+const CLEARANCE_FORM_BUTTON = 'Manage Clearance Forms';
 
 const TraditionalDepartmentPage = () => {
+  const navigate = useNavigate();
   const { state: locationState } = useLocationState();
-  const pageTitle = `Manage ${locationState?.v2_departments_name} Clearance`;
+  const pageTitle = `${locationState?.v2_departments_name} Clearance`;
 
   useEffect(() => {
     if (locationState) {
@@ -14,13 +20,30 @@ const TraditionalDepartmentPage = () => {
     }
   }, []);
 
+  const onNavigateToManageClearanceForms = () => {
+    const routeName = `${NAVIGATION_BAR_IDS?.USER?.USER_CLEARANCE_FORMS.split(':')?.[0]}${
+      locationState?.v2_department_id
+    }`;
+
+    navigateToRoute({
+      navigate,
+      routeName,
+      options: {
+        state: locationState,
+      },
+    });
+  };
   return (
     <DefaultContainer customStyles={styles.container} isLoading={false}>
       <NavigationSidebar />
       <PageContentContainer title={pageTitle} containerStyles={styles.pageContentContainer}>
         <div>
-          <Button type="primary" title="Create Clearance Form" style={{}}>
-            Create Clearance Form
+          <Button
+            onClick={onNavigateToManageClearanceForms}
+            type="primary"
+            title={CLEARANCE_FORM_BUTTON}
+            style={{}}>
+            {CLEARANCE_FORM_BUTTON}
           </Button>
         </div>
       </PageContentContainer>
