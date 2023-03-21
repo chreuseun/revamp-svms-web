@@ -3,23 +3,36 @@ import { Row, Col, Card, Typography } from 'antd';
 import PropTypes from 'prop-types';
 
 const MyDepartmentList = ({ myDepartmentsArray = [] }) => {
+  const onClickDepartmentCard = details => () => {
+    console.log('--- CLICK DEPT CARD: ', details);
+  };
+
   return (
     <Row gutter={16} style={{ padding: 16 }}>
       {myDepartmentsArray.map(details => {
+        const {
+          v2_departments_name: deptName,
+          v2_department_id: deptID,
+          department_type_name: deptTypeName,
+          educ_level_name: educLevelName,
+          department_head_officer: deptHeadOfficer,
+        } = details || {};
+
         return (
-          <Col span={8} key={details.v2_department_id} style={{ marginBottom: 16 }}>
+          <Col span={8} key={deptID} style={styles.col}>
             <Card
-              title={details.v2_departments_name}
+              title={deptName}
               bordered={true}
-              style={{ backgroundColor: '#ffd166' }}>
-              <Typography.Text strong>{details.department_type_name}</Typography.Text>
+              style={styles.card}
+              onClick={onClickDepartmentCard(details)}>
               <div>
-                <Typography.Text type="secondary">{details.educ_level_id}</Typography.Text>
+                <Typography.Text type="secondary">{deptTypeName}</Typography.Text>
               </div>
               <div>
-                <Typography.Text type="secondary">
-                  {details.department_head_officer}
-                </Typography.Text>
+                <Typography.Text type="secondary">{educLevelName}</Typography.Text>
+              </div>
+              <div>
+                <Typography.Text type="secondary">{deptHeadOfficer}</Typography.Text>
               </div>
             </Card>
           </Col>
@@ -31,6 +44,15 @@ const MyDepartmentList = ({ myDepartmentsArray = [] }) => {
 
 MyDepartmentList.propTypes = {
   myDepartmentsArray: PropTypes.array,
+};
+
+const styles = {
+  col: {
+    marginBottom: 16,
+  },
+  card: {
+    backgroundColor: '#ffd166',
+  },
 };
 
 export default MyDepartmentList;
