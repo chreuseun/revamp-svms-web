@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
+import { Button } from 'antd';
 
+import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
 import { useLocationState } from 'src/hooks/reactRouterDom';
 
 const TraditionalDepartmentPage = () => {
@@ -16,9 +17,13 @@ const TraditionalDepartmentPage = () => {
   return (
     <DefaultContainer customStyles={styles.container} isLoading={false}>
       <NavigationSidebar />
-      <PageContentContainer
-        title={pageTitle}
-        containerStyles={styles.pageContentContainer}></PageContentContainer>
+      <PageContentContainer title={pageTitle} containerStyles={styles.pageContentContainer}>
+        <div>
+          <Button type="primary" title="Create Clearance Form" style={{}}>
+            Create Clearance Form
+          </Button>
+        </div>
+      </PageContentContainer>
     </DefaultContainer>
   );
 };
