@@ -2,11 +2,11 @@ import React from 'react';
 import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
 import PropTypes from 'prop-types';
 
-const StandardPageTemplate = ({ isLoading = false, children }) => {
+const StandardPageTemplate = ({ isLoading = false, children, pageTitle = 'NO TITLE PA PO' }) => {
   return (
     <DefaultContainer customStyles={styles.container} isLoading={isLoading}>
       <NavigationSidebar />
-      <PageContentContainer title="Manage Semesters" containerStyles={styles.pageContentContainer}>
+      <PageContentContainer title={pageTitle} containerStyles={styles.pageContentContainer}>
         {children}
       </PageContentContainer>
     </DefaultContainer>
@@ -16,6 +16,7 @@ const StandardPageTemplate = ({ isLoading = false, children }) => {
 StandardPageTemplate.propTypes = {
   isLoading: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]),
+  pageTitle: PropTypes.string,
 };
 
 const styles = {
