@@ -124,6 +124,35 @@ const DEPARTMENTS_TABLE_COLUMNS = [
   },
 ];
 
+// color pallets https://www.pinterest.ph/pin/15551561205937872/
+// #e9311a #ed6335 #ecae7d #8db4ad #026c80 #064c72
+const DEPARTMENT_TYPES_CONFIG = {
+  SUBJECT: {
+    bgColor: '#e9311a',
+    textColor: '#FFF',
+  },
+  TRADITIONAL: {
+    bgColor: '#ed6335',
+    textColor: '#FFF',
+  },
+  VIOLATION: {
+    bgColor: '#ecae7d',
+    textColor: '#FFF',
+  },
+  ACTIVITY: {
+    bgColor: '#8db4ad',
+    textColor: '#FFF',
+  },
+  FINANCE: {
+    bgColor: '#026c80',
+    textColor: '#FFF',
+  },
+  REGISTRAR: {
+    bgColor: '#064c72',
+    textColor: '#FFF',
+  },
+};
+
 export {
   ADD_DEPARTMENTS_FORM_INPUTS,
   TRADITIONAL_DEPT_DB_ID,
@@ -131,4 +160,5 @@ export {
   EDUC_LEVEL_ID_KEY,
   DEPARTMENT_STATES,
   DEPARTMENTS_TABLE_COLUMNS,
+  DEPARTMENT_TYPES_CONFIG,
 };

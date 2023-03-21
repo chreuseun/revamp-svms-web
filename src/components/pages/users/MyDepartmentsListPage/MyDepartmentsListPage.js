@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import groupBy from 'lodash/groupBy';
 
 import { DefaultContainer, NavigationSidebar, PageContentContainer } from 'src/components/common';
 import { userAPIForDepartments } from 'src/hooks/APIs/users';
 import MyDepartmentsList from './MyDepartmentsList';
+import { groupDepartmentsByEducLevelName } from 'src/utils/departments';
 
 const { useGETDepartmentsListByAccountID } = userAPIForDepartments;
 
@@ -12,7 +14,7 @@ const MyDepartmentsListPage = () => {
     useGETDepartmentsListByAccountID({
       onCompleted: (list = []) => {
         if (Array.isArray(list)) {
-          setMyDepartmentList(list || []);
+          setMyDepartmentList(groupDepartmentsByEducLevelName(list || []));
         }
       },
     });
@@ -27,8 +29,7 @@ const MyDepartmentsListPage = () => {
       isLoading={isGETDepartmentsListByAccountIDLoading}>
       <NavigationSidebar />
       <PageContentContainer title="My Departments" containerStyles={styles.pageContentContainer}>
-        <MyDepartmentsList myDepartmentsArray={myDepartmentList} />
-        <pre style={{ fontSize: 8 }}>{JSON.stringify(myDepartmentList, null, 4)}</pre>
+        <MyDepartmentsList groupedDepartmentList={myDepartmentList} />
       </PageContentContainer>
     </DefaultContainer>
   );

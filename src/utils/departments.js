@@ -1,4 +1,4 @@
-import { uniqBy } from 'lodash';
+import { uniqBy, groupBy } from 'lodash';
 import { localeData } from 'moment';
 
 import { EDUCATION_LEVEL_IDS } from 'src/constants/academicLevels';
@@ -94,6 +94,14 @@ const showCourseSelect = ({ educationLevelID = null }) => {
   return [SENIOR_HS, COLLEGE].includes(educationLevelID);
 };
 
+const groupDepartmentsByEducLevelName = (myDepartmentsArray = []) => {
+  try {
+    return Object.entries(groupBy(myDepartmentsArray, 'educ_level_name'));
+  } catch {
+    return [];
+  }
+};
+
 export {
   getSelectYearlevels,
   showAcadDepartmentSelect,
@@ -101,4 +109,5 @@ export {
   getAcadDepartmentsOptions,
   getCourseOptions,
   getYearlevelOptions,
+  groupDepartmentsByEducLevelName,
 };
