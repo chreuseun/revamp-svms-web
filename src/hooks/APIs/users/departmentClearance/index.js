@@ -1,7 +1,7 @@
 import usePOSTAddOneDepartmentClearanceRequirement from './usePOSTAddOneDepartmentClearanceRequirement';
 import useGETDepartmentClearanceRequirementsByDepartmentID from './useGETDepartmentClearanceRequirementsByDepartmentID';
 
-export {
+export default {
   usePOSTAddOneDepartmentClearanceRequirement,
   useGETDepartmentClearanceRequirementsByDepartmentID,
 };

@@ -24,7 +24,7 @@ const useGETDepartmentClearanceRequirementsByDepartmentID = ({
         .GET_DEPARTMENT_CLEARANCE_BY_DEPARTMENT_ID,
     });
 
-  const runGETDeptClearanceReqByDeptID = async ({ v2_department_i: v2DeprtID = null }) => {
+  const runGETDeptClearanceReqByDeptID = async ({ v2_department_id: v2DeprtID = null }) => {
     await runHTTPGetRequest({
       config: {
         params: {

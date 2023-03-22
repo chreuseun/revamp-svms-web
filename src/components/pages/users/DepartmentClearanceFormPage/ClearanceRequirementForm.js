@@ -2,9 +2,10 @@ import React from 'react';
 import { Form, Input, Button, Select, Spin, Modal } from 'antd';
 
 import { useLocationState } from 'src/hooks/reactRouterDom';
-import { usePOSTAddOneDepartmentClearanceRequirement } from 'src/hooks/APIs/departmentClearance';
+import { userAPIForDepartmentsClearance } from 'src/hooks/APIs/users';
 
 const { useForm } = Form;
+const { usePOSTAddOneDepartmentClearanceRequirement } = userAPIForDepartmentsClearance;
 
 const SELECT_CLEARANCE_TYPE = [
   { value: 'FIXED', label: 'Fixed' },
