@@ -4,7 +4,7 @@ import { ENDPOINTS } from 'src/constants/endpoints';
 import useHTTPGet from 'src/hooks/APIs/useHTTPGet';
 
 const useGETActiveAcademicYear = ({ onCompleted = () => {}, onError = () => {} } = {}) => {
-  const { isGETRequestLoading: isGETAllAcademicYearsLoading, runHTTPGetRequest } = useHTTPGet({
+  const { isGETRequestLoading: isGETActiveAcademicYearLoading, runHTTPGetRequest } = useHTTPGet({
     onCompleted,
     onError: err => {
       notification.error({ message: err, description: 'Get Active Academic year error' });
@@ -16,13 +16,13 @@ const useGETActiveAcademicYear = ({ onCompleted = () => {}, onError = () => {} }
     url: ENDPOINTS.ACADEMIC_YEARS.GET_ACTIVE_ACADEMIC_YEAR,
   });
 
-  const runGETAllAcademicYears = async () => {
+  const runGETActiveAcademicYear = async () => {
     await runHTTPGetRequest({ config: {} });
   };
 
   return {
-    runGETAllAcademicYears,
-    isGETAllAcademicYearsLoading,
+    isGETActiveAcademicYearLoading,
+    runGETActiveAcademicYear,
   };
 };
 
