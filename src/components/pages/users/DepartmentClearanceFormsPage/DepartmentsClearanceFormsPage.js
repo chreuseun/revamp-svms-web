@@ -17,7 +17,7 @@ const DepartmentsClearanceFormsPage = () => {
   const [clearanceReq, setClearanceReq] = useState([]);
   const { state: locationState } = useLocationState();
   const { v2_departments_name: deptName = '', v2_department_id: deptID } = locationState;
-  const pageTitle = `Manage Clearance Forms: ${deptName}`;
+  const pageTitle = `Clearance Requirements: ${deptName}`;
   const { isGETDeptClearanceReqByDeptIDLoading, runGETDeptClearanceReqByDeptID } =
     useGETDepartmentClearanceRequirementsByDepartmentID({
       onCompleted: response => {
