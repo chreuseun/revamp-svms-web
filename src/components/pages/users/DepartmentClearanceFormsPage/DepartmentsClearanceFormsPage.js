@@ -7,6 +7,7 @@ import { StandardPageTemplate } from 'src/components/templates';
 import { useLocationState } from 'src/hooks/reactRouterDom';
 import { navigateToRoute } from 'src/utils/reactRouterDom';
 import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
+import DepartmentClearanceList from './DepartmentClearanceList';
 
 const DepartmentsClearanceFormsPage = () => {
   const navigate = useNavigate();
@@ -30,17 +31,26 @@ const DepartmentsClearanceFormsPage = () => {
 
   return (
     <StandardPageTemplate pageTitle={pageTitle}>
-      {/* <div style={{ border: '2px solid red' }}>
-        <pre>{JSON.stringify(state, null, 4)}</pre>
-      </div> */}
-      <div style={{}}>
+      <div style={{ border: '2px solid red' }}>
+        <pre>{JSON.stringify(locationState, null, 4)}</pre>
+      </div>
+      <div style={styles.inputHeaderContainer}>
         <Button onClick={navigateToAddClearanceForm} icon={<FileAddOutlined />}>
           Add Cleareance Requirement
         </Button>
       </div>
-      {/* <div style={{ border: '2px solid green', height: 500 }}> ANTD.Table to list</div> */}
+      <DepartmentClearanceList />
     </StandardPageTemplate>
   );
+};
+
+const styles = {
+  inputHeaderContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    margin: '16px 0px',
+  },
 };
 
 export default DepartmentsClearanceFormsPage;

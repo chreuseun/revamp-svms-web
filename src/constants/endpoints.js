@@ -6,9 +6,6 @@ const ENDPOINTS = {
   LOGIN: {
     API_LOGIN: '/api/login',
   },
-  ACADEMIC_YEAR: {
-    API_ACADYEAR_GET: '/api/acad_year/get',
-  },
   AUTH: {
     API_AUTH: '/api/auth',
     API_LOGOUT: '/api/logout',
@@ -42,18 +39,20 @@ const ENDPOINTS = {
     GET_ALL_ACADEMIC_YEARS: `/v2/academic_years`,
     ADD_ACADEMIC_YEAR: `/v2/academic_years/add`,
     UPDATE_ACADEMIC_YEAR: `/v2/academic_years/update`,
+    GET_ACTIVE_ACADEMIC_YEAR: `/v2/academic_years/active-academic-year`,
   },
   STUDENTS: {
     BULK_UPSERT_STUDENTS: `/v2/student/bulk-insert`,
-  },
-  DEPARTMENT_CLEARANCE_REQUIREMENT: {
-    ADD_ONE_DEPARTMENT_CLEARANCE_RECORD: `/v2/department-clearance/add-one-record`,
   },
 };
 
 const USER_ENDPOINTS = {
   DEPARTMENTS: {
     GET_DEPARTMENTS_LIST_BY_ACCOUNT_ID: '/v2/departments/account',
+  },
+  DEPARTMENT_CLEARANCE_REQUIREMENT: {
+    ADD_ONE_DEPARTMENT_CLEARANCE_RECORD: `/v2/department-clearance/add-one-record`,
+    GET_DEPARTMENT_CLEARANCE_BY_DEPARTMENT_ID: '/v2/department-clearance/',
   },
 };
 
