@@ -1,8 +1,9 @@
-import React from 'react';
-import { Form, Input, Button, Select, Spin, Modal } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button, Select, Spin, Modal, notification } from 'antd';
 
 import { useLocationState } from 'src/hooks/reactRouterDom';
 import { userAPIForDepartmentsClearance } from 'src/hooks/APIs/users';
+import { useGETActiveAcademicYear } from 'src/hooks/APIs/academicYears';
 
 const { useForm } = Form;
 const { usePOSTAddOneDepartmentClearanceRequirement } = userAPIForDepartmentsClearance;
@@ -19,6 +20,7 @@ const SELECT_INITIAL_STATUS = [
 
 const FormDisabledDemo = () => {
   const { state } = useLocationState();
+  const [activeAcademicYearData, setAcadamicYearData] = useState(null);
   const [form] = useForm();
 
   const { isPOSTAddOneDepartmentClearanceReqLoading, runPOSTAddOneDepartmentClearanceReq } =
@@ -33,6 +35,27 @@ const FormDisabledDemo = () => {
       },
     });
 
+  const { isGETActiveAcademicYearLoading, runGETActiveAcademicYear } = useGETActiveAcademicYear({
+    onCompleted: response => {
+      const { success, data, error_message: errMsg } = response?.data || {};
+
+      if (success) {
+        setAcadamicYearData(data);
+      } else {
+        notification.error({
+          message: `Error on Academic Year data`,
+          description: errMsg,
+        });
+      }
+    },
+  });
+
+  const isFormLoading = isGETActiveAcademicYearLoading || isPOSTAddOneDepartmentClearanceReqLoading;
+
+  useEffect(() => {
+    runGETActiveAcademicYear();
+  }, []);
+
   const onFinish = values => {
     const { description, initial_status: initialStatus, name } = values;
 
@@ -45,7 +68,8 @@ const FormDisabledDemo = () => {
   };
 
   return (
-    <Spin spinning={isPOSTAddOneDepartmentClearanceReqLoading}>
+    <Spin spinning={isFormLoading}>
+      <pre>{JSON.stringify(activeAcademicYearData, null, 4)}</pre>
       <Form style={{ maxWidth: 600 }} layout="horizontal" form={form} onFinish={onFinish}>
         <Form.Item
           label="Requirement Type"
