@@ -34,6 +34,9 @@ const usePOSTAddOneDepartmentClearanceRequirement = ({ onCompleted, onError } = 
     initialStatus = null,
     name = null,
     description = null,
+    type = null,
+    v2SemID = null,
+    v2AcadYearID = null,
   } = {}) => {
     await runHTTPPostRequest({
       data: {
@@ -41,6 +44,9 @@ const usePOSTAddOneDepartmentClearanceRequirement = ({ onCompleted, onError } = 
         initial_status: initialStatus,
         name,
         description,
+        type,
+        v2_semester_id: v2SemID,
+        v2_academic_year_id: v2AcadYearID,
       },
     });
   };

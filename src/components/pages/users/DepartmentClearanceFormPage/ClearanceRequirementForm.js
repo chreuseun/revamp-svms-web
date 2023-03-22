@@ -57,13 +57,26 @@ const FormDisabledDemo = () => {
   }, []);
 
   const onFinish = values => {
-    const { description, initial_status: initialStatus, name } = values;
+    if (!activeAcademicYearData) {
+      notification.error({ description: 'No Active Semester Info' });
+
+      return;
+    }
+
+    const { description, initial_status: initialStatus, name, requirement_type: reqType } = values;
+    const { semester, academic_year: acadYear } = activeAcademicYearData || {};
+    const isReqTypeFixed = SELECT_CLEARANCE_TYPE?.[0].value === reqType;
+    const v2SemID = isReqTypeFixed ? 0 : semester?.id;
+    const v2AcadYearID = isReqTypeFixed ? 0 : acadYear?.id;
 
     runPOSTAddOneDepartmentClearanceReq({
       description,
       initialStatus,
       name,
       v2DeptId: state?.v2_department_id,
+      type: reqType,
+      v2AcadYearID,
+      v2SemID,
     });
   };
 
