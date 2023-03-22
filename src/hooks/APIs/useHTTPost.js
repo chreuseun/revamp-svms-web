@@ -16,6 +16,17 @@ const useHTTPost = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {
         url,
       });
 
+      const { error_message: serverErrMessage } = postRequestResponse?.data || {};
+
+      if (serverErrMessage === 'Error: Invalid Authorization Token') {
+        Modal.warning({
+          title: 'Session expired',
+          onOk: initiateLogout,
+        });
+
+        return;
+      }
+
       if (onCompleted) {
         onCompleted(postRequestResponse);
       }

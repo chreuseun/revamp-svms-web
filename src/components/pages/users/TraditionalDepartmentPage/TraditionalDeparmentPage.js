@@ -8,6 +8,7 @@ import { navigateToRoute } from 'src/utils/reactRouterDom';
 import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
 
 const CLEARANCE_FORM_BUTTON = 'Manage Clearance Forms';
+const CLEARANCE_LIST_BUTTON = 'Clearance List';
 
 const TraditionalDepartmentPage = () => {
   const navigate = useNavigate();
@@ -33,10 +34,27 @@ const TraditionalDepartmentPage = () => {
       },
     });
   };
+
+  const onNavigateToClearancesList = () => {
+    const routeName = `${NAVIGATION_BAR_IDS?.USER?.USER_CLEARANCE_FORMS.split(':')?.[0]}${
+      locationState?.v2_department_id
+    }`;
+  };
+
   return (
     <DefaultContainer customStyles={styles.container} isLoading={false}>
       <NavigationSidebar />
       <PageContentContainer title={pageTitle} containerStyles={styles.pageContentContainer}>
+        <div>
+          <Button
+            onClick={onNavigateToClearancesList}
+            type="primary"
+            title={CLEARANCE_LIST_BUTTON}
+            style={{}}>
+            {CLEARANCE_LIST_BUTTON}
+          </Button>
+        </div>
+        <br />
         <div>
           <Button
             onClick={onNavigateToManageClearanceForms}

@@ -16,6 +16,17 @@ const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {
         url,
       });
 
+      const { error_message: serverErrMessage } = getRequestResponse?.data || {};
+
+      if (serverErrMessage === 'Error: Invalid Authorization Token') {
+        Modal.warning({
+          title: 'Session expired',
+          onOk: initiateLogout,
+        });
+
+        return;
+      }
+
       if (onCompleted) {
         onCompleted(getRequestResponse);
       }
