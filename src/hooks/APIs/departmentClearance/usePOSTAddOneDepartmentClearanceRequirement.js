@@ -20,8 +20,7 @@ const usePOSTAddOneDepartmentClearanceRequirement = ({ onCompleted, onError } = 
       },
       onError: err => {
         notification.error({
-          message: err,
-          description: 'Error@usePOSTAddOneDepartmentClearanceRequirement',
+          description: `Error@ adding requirement: ${err}`,
         });
 
         if (onError) {
@@ -30,10 +29,18 @@ const usePOSTAddOneDepartmentClearanceRequirement = ({ onCompleted, onError } = 
       },
     });
 
-  const runPOSTAddOneDepartmentClearanceReq = async ({ v2DeptId = null } = {}) => {
+  const runPOSTAddOneDepartmentClearanceReq = async ({
+    v2DeptId = null,
+    initialStatus = null,
+    name = null,
+    description = null,
+  } = {}) => {
     await runHTTPPostRequest({
       data: {
         v2_departments_id: v2DeptId,
+        initial_status: initialStatus,
+        name,
+        description,
       },
     });
   };
