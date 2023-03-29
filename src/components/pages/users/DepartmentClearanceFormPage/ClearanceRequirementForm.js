@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, Select, Spin, Modal, notification } from 'antd';
+import { Form, Input, Button, Select, Spin, Modal, notification, Typography, Divider } from 'antd';
 
 import { useLocationState } from 'src/hooks/reactRouterDom';
 import { userAPIForDepartmentsClearance } from 'src/hooks/APIs/users';
@@ -80,9 +80,17 @@ const FormDisabledDemo = () => {
     });
   };
 
+  const activeSemText = activeAcademicYearData?.semester?.name;
+  const activeAcademicYearText = activeAcademicYearData?.academic_year?.name;
+
   return (
     <Spin spinning={isFormLoading}>
-      <pre>{JSON.stringify(activeAcademicYearData, null, 4)}</pre>
+      {!!activeAcademicYearText && (
+        <Typography.Text>Active Academic Year: {activeAcademicYearText}</Typography.Text>
+      )}
+      <br />
+      {!!activeSemText && <Typography.Text>Active Semester: {activeSemText}</Typography.Text>}
+      <Divider />
       <Form style={{ maxWidth: 600 }} layout="horizontal" form={form} onFinish={onFinish}>
         <Form.Item
           label="Requirement Type"
