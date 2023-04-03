@@ -30,6 +30,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     overflow: 'scroll',
+    flexGrow: 1,
   },
 };
 

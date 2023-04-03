@@ -37,6 +37,16 @@ const columns = ({ onSeeStudents = () => {} }) => [
     render: updatedAt => <div>{moment(updatedAt).format('MMM DD, YYYY hh:mm')}</div>,
   },
   {
+    title: 'Academic Year',
+    dataIndex: 'academic_year_name',
+    key: 'academic_year_name',
+  },
+  {
+    title: 'Semester',
+    dataIndex: 'semester_name',
+    key: 'semester_name',
+  },
+  {
     title: '',
     key: 'action-see-students',
     dataIndex: 'action-see-students',

@@ -48,13 +48,15 @@ const NavigationSidebar = () => {
         style={{
           overflowY: 'scroll',
           height: '100%',
+          maxWidth: 250,
+          minWidth: 70,
         }}>
         <Menu
           onClick={onClickMenu}
           inlineCollapsed={isCollapsed}
           style={{
             maxWidth: 250,
-            minWidth: 25,
+            minWidth: 70,
             overflowY: 'scroll',
             height: '100%',
           }}
@@ -89,13 +91,15 @@ const NavigationSidebar = () => {
         style={{
           overflowY: 'scroll',
           height: '100%',
+          maxWidth: 250,
+          minWidth: 70,
         }}>
         <Menu
           onClick={onClickMenu}
           inlineCollapsed={isCollapsed}
           style={{
             maxWidth: 250,
-            minWidth: 25,
+            minWidth: 70,
             overflowY: 'scroll',
             height: '100%',
           }}
