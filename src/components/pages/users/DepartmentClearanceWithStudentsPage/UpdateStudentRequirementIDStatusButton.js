@@ -1,34 +1,47 @@
 import React, { useState } from 'react';
-import { Tag, Button } from 'antd';
+import { Tag, Button, notification, Modal } from 'antd';
+import { userAPIForStudentsDepartmentClearanceRecord } from 'src/hooks/APIs/users';
 
 import PropTypes from 'prop-types';
+
+const { usePOSTUpdateStudentClearanceRecordByID } = userAPIForStudentsDepartmentClearanceRecord;
 
 const APPROVED_STATUS = 'APPROVED';
 const REJECTED_STATUS = 'REJECTED';
 
 const UpdateStudentRequirementIDStatus = ({ studentRecord = {} }) => {
-  const { status } = studentRecord;
-  const [currentStatus, setCurrentStatus] = useState(status);
-  const studentDeptClearanceRecordID = studentRecord?.id;
+  const { status, id: studentDeptClearanceRecordID = null } = studentRecord;
+  const isApproved = status === APPROVED_STATUS;
+
+  const { isPOSTUpdateStudentClearanceRecrodByIDLoading, runPOSTUpdateStudentClearanceRecrodByID } =
+    usePOSTUpdateStudentClearanceRecordByID({
+      onCompleted: data => {
+        if (data?.data?.success) {
+          Modal.success({
+            onOk: () => window.location.reload(),
+            content: `Record Successfully udpated`,
+          });
+        } else {
+          notification.error({
+            message: `${data?.data?.error_message}`,
+          });
+        }
+      },
+    });
 
   const onClickTag = updateStatus => () => {
-    console.log('-:', studentDeptClearanceRecordID);
-    setCurrentStatus(updateStatus);
+    runPOSTUpdateStudentClearanceRecrodByID({
+      status: updateStatus,
+      studentsDepartmentClearanceRecordID: studentDeptClearanceRecordID,
+    });
   };
 
-  const isApproved = currentStatus === APPROVED_STATUS;
-
-  if (isApproved) {
-    return (
-      <Button onClick={onClickTag(REJECTED_STATUS)}>
-        <Tag color="green">{status}</Tag>
-      </Button>
-    );
-  }
-
   return (
-    <Button onClick={onClickTag(APPROVED_STATUS)}>
-      <Tag color="red">{status}</Tag>
+    <Button
+      style={{ border: 'none' }}
+      loading={isPOSTUpdateStudentClearanceRecrodByIDLoading}
+      onClick={onClickTag(isApproved ? REJECTED_STATUS : APPROVED_STATUS)}>
+      <Tag color={isApproved ? 'green' : 'red'}>{status}</Tag>
     </Button>
   );
 };

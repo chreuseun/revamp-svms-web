@@ -9,7 +9,7 @@ const { useForm } = Form;
 const { usePOSTAddOneDepartmentClearanceRequirement } = userAPIForDepartmentsClearance;
 
 const SELECT_CLEARANCE_TYPE = [
-  { value: 'FIXED', label: 'Fixed' },
+  // { value: 'FIXED', label: 'Fixed' },
   { value: 'BY_ACADEMIC_YEAR', label: 'By Academic Year' },
 ];
 

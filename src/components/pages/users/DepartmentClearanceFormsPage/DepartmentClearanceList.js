@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import PropTypes from 'prop-types';
 
@@ -26,13 +27,14 @@ const columns = ({ onSeeStudents = () => {} }) => [
   },
   {
     title: 'Created By',
-    dataIndex: 'creator_account_id',
-    key: 'creator_account_id',
+    dataIndex: 'creator_fullname',
+    key: 'creator_fullname',
   },
   {
     title: 'Created At',
     key: 'created_at',
     dataIndex: 'created_at',
+    render: updatedAt => <div>{moment(updatedAt).format('MMM DD, YYYY hh:mm')}</div>,
   },
   {
     title: '',

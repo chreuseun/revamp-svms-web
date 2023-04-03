@@ -56,6 +56,7 @@ const USER_ENDPOINTS = {
   },
   STUDENTS_DEPARTMENT_CLEARANCE_REQUIREMENT: {
     GET_FILTED_STUDENT_DEPT_CLR_REQ_BY_ID: `/v2/student-department-clearance-record/filtered-student-clearance`,
+    UPDATE_STUDENT_CLEARANCE_RECORD_BY_ID: `/v2/student-department-clearance-record/update-student-clearance_record`,
   },
 };
 

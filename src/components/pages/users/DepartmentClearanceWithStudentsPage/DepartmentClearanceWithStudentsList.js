@@ -37,8 +37,8 @@ const columns = [
   },
   {
     title: 'Updated By',
-    dataIndex: 'account_id_update_by',
-    key: 'account_id_update_by',
+    dataIndex: 'updated_by_name',
+    key: 'updated_by_name',
   },
   {
     title: 'Updated At',

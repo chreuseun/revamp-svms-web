@@ -1,3 +1,7 @@
 import useGETStudentsDepartmentClearanceRecord from './useGETStudentsDepartmentClearanceRecord';
+import usePOSTUpdateStudentClearanceRecordByID from './usePOSTUpdateStudentClearanceRecordByID';
 
-export default { useGETStudentsDepartmentClearanceRecord };
+export default {
+  useGETStudentsDepartmentClearanceRecord,
+  usePOSTUpdateStudentClearanceRecordByID,
+};
