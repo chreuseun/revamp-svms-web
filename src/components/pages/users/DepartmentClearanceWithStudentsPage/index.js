@@ -1,0 +1,3 @@
+import DepartmentClearanceWithStudentsPage from './DepartmentClearanceWithStudentsPage';
+
+export default DepartmentClearanceWithStudentsPage;

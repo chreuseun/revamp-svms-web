@@ -50,7 +50,8 @@ const TraditionalDepartmentPage = () => {
             onClick={onNavigateToClearancesList}
             type="primary"
             title={CLEARANCE_LIST_BUTTON}
-            style={{}}>
+            style={{ height: 100, width: 250 }}
+            size="large">
             {CLEARANCE_LIST_BUTTON}
           </Button>
         </div>
@@ -60,7 +61,8 @@ const TraditionalDepartmentPage = () => {
             onClick={onNavigateToManageClearanceForms}
             type="primary"
             title={CLEARANCE_FORM_BUTTON}
-            style={{}}>
+            style={{ height: 100, width: 250 }}
+            size="large">
             {CLEARANCE_FORM_BUTTON}
           </Button>
         </div>

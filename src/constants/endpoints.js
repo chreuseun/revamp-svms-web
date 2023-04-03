@@ -54,6 +54,9 @@ const USER_ENDPOINTS = {
     ADD_ONE_DEPARTMENT_CLEARANCE_RECORD: `/v2/department-clearance/add-one-record`,
     GET_DEPARTMENT_CLEARANCE_BY_DEPARTMENT_ID: '/v2/department-clearance/',
   },
+  STUDENTS_DEPARTMENT_CLEARANCE_REQUIREMENT: {
+    GET_FILTED_STUDENT_DEPT_CLR_REQ_BY_ID: `/v2/student-department-clearance-record/filtered-student-clearance`,
+  },
 };
 
 export { DEFAULT_BASE_URL, ENDPOINTS, USER_ENDPOINTS };

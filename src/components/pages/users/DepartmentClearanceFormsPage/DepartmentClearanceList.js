@@ -1,9 +1,18 @@
 import React from 'react';
 import { Table } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
+import { navigateToRoute } from 'src/utils/reactRouterDom';
+import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
+
 const columns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -27,24 +36,26 @@ const columns = [
 ];
 
 const DepartmentClearanceList = ({ clearanceReqArray = [] }) => {
+  const navigate = useNavigate();
+
+  const onRowClick = record => () => {
+    navigateToRoute({
+      navigate,
+      routeName: NAVIGATION_BAR_IDS.USER.USER_STUDENT_CLR_REQ_LIST,
+      options: { state: record },
+    });
+  };
+
   return (
-    <>
-      {/* <pre>{JSON.stringify(clearanceReqArray, null, 4)}</pre> */}
-      <Table
-        dataSource={clearanceReqArray}
-        columns={columns}
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: event => {
-              console.log('---- record: ', record);
-              // if (onRowOnClick) {
-              //   onRowOnClick({ rowIndex, record, event });
-              // }
-            },
-          };
-        }}
-      />
-    </>
+    <Table
+      dataSource={clearanceReqArray}
+      columns={columns}
+      onRow={(record, _) => {
+        return {
+          onClick: onRowClick(record),
+        };
+      }}
+    />
   );
 };
 
