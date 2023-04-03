@@ -1,13 +1,14 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 import { navigateToRoute } from 'src/utils/reactRouterDom';
 import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
+import { useLocationState } from 'src/hooks/reactRouterDom';
 
-const columns = [
+const columns = ({ onSeeStudents = () => {} }) => [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -33,30 +34,38 @@ const columns = [
     key: 'created_at',
     dataIndex: 'created_at',
   },
+  {
+    title: '',
+    key: 'action-see-students',
+    dataIndex: 'action-see-students',
+    render: (_, record) => (
+      <div>
+        <Button
+          onClick={() => {
+            onSeeStudents(record);
+          }}
+          type="primary">
+          See Students
+        </Button>
+      </div>
+    ),
+  },
 ];
 
 const DepartmentClearanceList = ({ clearanceReqArray = [] }) => {
+  const { state: departmentData } = useLocationState();
+
   const navigate = useNavigate();
 
-  const onRowClick = record => () => {
+  const onSeeStudents = record => {
     navigateToRoute({
       navigate,
       routeName: NAVIGATION_BAR_IDS.USER.USER_STUDENT_CLR_REQ_LIST,
-      options: { state: record },
+      options: { state: { deptRequirementData: record, departmentData } },
     });
   };
 
-  return (
-    <Table
-      dataSource={clearanceReqArray}
-      columns={columns}
-      onRow={(record, _) => {
-        return {
-          onClick: onRowClick(record),
-        };
-      }}
-    />
-  );
+  return <Table dataSource={clearanceReqArray} columns={columns({ onSeeStudents })} />;
 };
 
 DepartmentClearanceList.propTypes = {
