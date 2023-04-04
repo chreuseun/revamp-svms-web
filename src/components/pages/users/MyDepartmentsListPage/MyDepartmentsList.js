@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Typography, Divider } from 'antd';
+import { Row, Col, Card, Typography, Divider, notification } from 'antd';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,16 +12,21 @@ const MyDepartmentList = ({ groupedDepartmentList = [] }) => {
   const navigate = useNavigate();
 
   const onClickDepartmentCard = details => () => {
-    const { v2_department_id: departmentID } = details;
-
+    const { v2_department_id: departmentID, department_type_name: deptTypeName = null } = details;
     const baseRoute = NAVIGATION_BAR_IDS.USER.USER_TRADITIONAL_DEPARTMENT.split(':')?.[0];
     const routeName = `${baseRoute}${departmentID}`;
 
-    navigateToRoute({
-      navigate,
-      routeName,
-      options: { state: details },
-    });
+    if (deptTypeName === DEPARTMENT_TYPES_CONFIG.TRADITIONAL.name) {
+      navigateToRoute({
+        navigate,
+        routeName,
+        options: { state: details },
+      });
+    } else {
+      notification.info({
+        message: 'Coming soon',
+      });
+    }
   };
 
   return (

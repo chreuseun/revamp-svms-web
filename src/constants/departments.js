@@ -5,8 +5,6 @@ import { ACADEMIC_LEVELS } from './academicLevels';
 
 const { Text } = Typography;
 
-const TRADITIONAL_DEPT_DB_ID = 2;
-
 const ADD_DEPARTMENTS_FORM_INPUTS = {
   DEPT_NAME: {
     label: 'Name',
@@ -134,6 +132,7 @@ const DEPARTMENT_TYPES_CONFIG = {
   TRADITIONAL: {
     bgColor: '#ed6335',
     textColor: '#FFF',
+    name: 'TRADITIONAL',
   },
   VIOLATION: {
     bgColor: '#ecae7d',
@@ -155,7 +154,6 @@ const DEPARTMENT_TYPES_CONFIG = {
 
 export {
   ADD_DEPARTMENTS_FORM_INPUTS,
-  TRADITIONAL_DEPT_DB_ID,
   ADD_DEPARTMENT_FORM,
   EDUC_LEVEL_ID_KEY,
   DEPARTMENT_STATES,
