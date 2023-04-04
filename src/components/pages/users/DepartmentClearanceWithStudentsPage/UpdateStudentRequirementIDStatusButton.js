@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tag, Button, notification, Modal } from 'antd';
 import { userAPIForStudentsDepartmentClearanceRecord } from 'src/hooks/APIs/users';
 
