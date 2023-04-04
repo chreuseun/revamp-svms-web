@@ -77,7 +77,12 @@ const DepartmentClearanceList = ({ clearanceReqArray = [] }) => {
     });
   };
 
-  return <Table dataSource={clearanceReqArray} columns={columns({ onSeeStudents })} />;
+  return (
+    <>
+      {/* <pre>{JSON.stringify(clearanceReqArray, null, 4)}</pre> */}
+      <Table dataSource={clearanceReqArray} columns={columns({ onSeeStudents })} />
+    </>
+  );
 };
 
 DepartmentClearanceList.propTypes = {

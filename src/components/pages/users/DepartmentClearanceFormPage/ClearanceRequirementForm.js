@@ -65,7 +65,7 @@ const FormDisabledDemo = () => {
 
     const { description, initial_status: initialStatus, name, requirement_type: reqType } = values;
     const { semester, academic_year: acadYear } = activeAcademicYearData || {};
-    const isReqTypeFixed = SELECT_CLEARANCE_TYPE?.[0].value === reqType;
+    const isReqTypeFixed = reqType === 'FIXED';
     const v2SemID = isReqTypeFixed ? 0 : semester?.id;
     const v2AcadYearID = isReqTypeFixed ? 0 : acadYear?.id;
 
