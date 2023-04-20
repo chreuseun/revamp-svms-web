@@ -34,24 +34,35 @@ const ViolationHomePage = () => {
   return (
     <StandardPageTemplate pageTitle={'Violation Home'}>
       <pre style={{ fontSize: 6 }}>{JSON.stringify(locationState, null, 4)}</pre>
-      <Button
-        onClick={onNavigateToManageViolationList}
-        type="primary"
-        title={'violations'}
-        style={{ height: 60 }}
-        size="large">
-        Manage Violations List
-      </Button>
-      <Button
-        onClick={onNavigateToIssueViolations}
-        type="primary"
-        title={'violations'}
-        style={{ height: 60, marginTop: 8 }}
-        size="large">
-        Issue Violations
-      </Button>
+      <div style={styles.primaryBtnContainer}>
+        <Button
+          onClick={onNavigateToManageViolationList}
+          type="primary"
+          title={'violations'}
+          style={{ height: 60 }}
+          size="large">
+          Manage Violations List
+        </Button>
+        <Button
+          onClick={onNavigateToIssueViolations}
+          type="primary"
+          title={'violations'}
+          style={{ height: 60, marginTop: 8 }}
+          size="large">
+          Issue Violations
+        </Button>
+      </div>
     </StandardPageTemplate>
   );
+};
+
+const styles = {
+  primaryBtnContainer: {
+    flexDirection: 'column  ',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 };
 
 export default ViolationHomePage;
