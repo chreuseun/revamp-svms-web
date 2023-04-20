@@ -1,17 +1,41 @@
 import React from 'react';
 import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import { StandardPageTemplate } from 'src/components/templates';
 import { useLocationState } from 'src/hooks/reactRouterDom';
+import { NAVIGATION_BAR_IDS } from 'src/constants/navigationBar';
+import { navigateToRoute } from 'src/utils/reactRouterDom';
 
 const ViolationHomePage = () => {
-  const { state } = useLocationState();
+  const { state: locationState } = useLocationState();
+  const navigate = useNavigate();
+
+  const onNavigateToManageViolationList = () => {
+    navigateToRoute({
+      navigate,
+      routeName: NAVIGATION_BAR_IDS.USER.USER_VIOLATIONS_CONFIGURATION,
+      options: {
+        state: locationState,
+      },
+    });
+  };
+
+  const onNavigateToIssueViolations = () => {
+    navigateToRoute({
+      navigate,
+      routeName: NAVIGATION_BAR_IDS.USER.USER_ISSUE_VIOLATION,
+      options: {
+        state: locationState,
+      },
+    });
+  };
 
   return (
     <StandardPageTemplate pageTitle={'Violation Home'}>
-      <pre style={{ fontSize: 6 }}>{JSON.stringify(state, null, 4)}</pre>
+      <pre style={{ fontSize: 6 }}>{JSON.stringify(locationState, null, 4)}</pre>
       <Button
-        onClick={() => {}}
+        onClick={onNavigateToManageViolationList}
         type="primary"
         title={'violations'}
         style={{ height: 60 }}
@@ -19,7 +43,7 @@ const ViolationHomePage = () => {
         Manage Violations List
       </Button>
       <Button
-        onClick={() => {}}
+        onClick={onNavigateToIssueViolations}
         type="primary"
         title={'violations'}
         style={{ height: 60, marginTop: 8 }}

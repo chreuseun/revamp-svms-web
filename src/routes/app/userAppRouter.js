@@ -10,6 +10,8 @@ import {
   DepartmentClearanceFormPage,
   DepartmentClearanceWithStudentsPage,
   ViolationHomePage,
+  ViolationsConfigurationPage,
+  IssueViolationPage,
 } from 'src/components/pages/users';
 
 const appRouter = createBrowserRouter([
@@ -47,6 +49,16 @@ const appRouter = createBrowserRouter([
     path: NAVIGATION_BAR_IDS.USER.USER_VIOLATION_HOME,
     caseSensitive: true,
     element: <ViolationHomePage />,
+  },
+  {
+    path: NAVIGATION_BAR_IDS.USER.USER_VIOLATIONS_CONFIGURATION,
+    caseSensitive: true,
+    element: <ViolationsConfigurationPage />,
+  },
+  {
+    path: NAVIGATION_BAR_IDS.USER.USER_ISSUE_VIOLATION,
+    caseSensitive: true,
+    element: <IssueViolationPage />,
   },
   {
     path: '*',
