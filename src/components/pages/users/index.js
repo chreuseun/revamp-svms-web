@@ -3,6 +3,7 @@ import TraditionalDepartmentPage from './TraditionalDepartmentPage';
 import DepartmentClearanceFormsPage from './DepartmentClearanceFormsPage';
 import DepartmentClearanceFormPage from './DepartmentClearanceFormPage';
 import DepartmentClearanceWithStudentsPage from './DepartmentClearanceWithStudentsPage';
+import ViolationHomePage from './ViolationHomePage';
 
 export {
   MyDepartmentsListPage,
@@ -10,4 +11,5 @@ export {
   DepartmentClearanceFormsPage,
   DepartmentClearanceFormPage,
   DepartmentClearanceWithStudentsPage,
+  ViolationHomePage,
 };

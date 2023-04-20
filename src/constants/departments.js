@@ -137,6 +137,7 @@ const DEPARTMENT_TYPES_CONFIG = {
   VIOLATION: {
     bgColor: '#ecae7d',
     textColor: '#FFF',
+    name: 'VIOLATION',
   },
   ACTIVITY: {
     bgColor: '#8db4ad',

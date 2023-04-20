@@ -16,7 +16,11 @@ const MyDepartmentList = ({ groupedDepartmentList = [] }) => {
     const baseRoute = NAVIGATION_BAR_IDS.USER.USER_TRADITIONAL_DEPARTMENT.split(':')?.[0];
     const routeName = `${baseRoute}${departmentID}`;
 
-    if (deptTypeName === DEPARTMENT_TYPES_CONFIG.TRADITIONAL.name) {
+    if (
+      [DEPARTMENT_TYPES_CONFIG.TRADITIONAL.name, DEPARTMENT_TYPES_CONFIG.VIOLATION.name].includes(
+        deptTypeName,
+      )
+    ) {
       navigateToRoute({
         navigate,
         routeName,

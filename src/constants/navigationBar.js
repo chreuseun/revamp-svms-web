@@ -34,6 +34,7 @@ const NAVIGATION_BAR_IDS = {
     USER_CLEARANCE_FORMS: '/user/clearance-forms/:v2_department_id',
     USER_CLEARANCE_ADD_FORM: '/user/add-clearance-form/:v2_department_id',
     USER_STUDENT_CLR_REQ_LIST: '/user/students-clearance-requirement-list',
+    USER_VIOLATION_HOME: '/user/violation-home',
   },
 };
 

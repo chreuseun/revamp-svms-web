@@ -2,6 +2,7 @@ import { uniqBy, groupBy } from 'lodash';
 import { localeData } from 'moment';
 
 import { EDUCATION_LEVEL_IDS } from 'src/constants/academicLevels';
+import { DEPARTMENT_TYPES_CONFIG } from 'src/constants/departments';
 
 const { GRADE_SCHOOL, JUNIOR_HS, SENIOR_HS, COLLEGE } = EDUCATION_LEVEL_IDS;
 
@@ -102,6 +103,10 @@ const groupDepartmentsByEducLevelName = (myDepartmentsArray = []) => {
   }
 };
 
+const isViolationDepartment = ({ deptTypeName = '' } = {}) => {
+  return deptTypeName === DEPARTMENT_TYPES_CONFIG.VIOLATION.name;
+};
+
 export {
   getSelectYearlevels,
   showAcadDepartmentSelect,
@@ -110,4 +115,5 @@ export {
   getCourseOptions,
   getYearlevelOptions,
   groupDepartmentsByEducLevelName,
+  isViolationDepartment,
 };
