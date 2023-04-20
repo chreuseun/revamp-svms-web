@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'antd';
 
 import { StandardPageTemplate } from 'src/components/templates';
 import { useLocationState } from 'src/hooks/reactRouterDom';
@@ -8,7 +9,23 @@ const ViolationHomePage = () => {
 
   return (
     <StandardPageTemplate pageTitle={'Violation Home'}>
-      <pre>{JSON.stringify(state, null, 4)}</pre>
+      <pre style={{ fontSize: 6 }}>{JSON.stringify(state, null, 4)}</pre>
+      <Button
+        onClick={() => {}}
+        type="primary"
+        title={'violations'}
+        style={{ height: 60 }}
+        size="large">
+        Manage Violations List
+      </Button>
+      <Button
+        onClick={() => {}}
+        type="primary"
+        title={'violations'}
+        style={{ height: 60, marginTop: 8 }}
+        size="large">
+        Issue Violations
+      </Button>
     </StandardPageTemplate>
   );
 };
